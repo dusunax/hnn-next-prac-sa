@@ -10,7 +10,7 @@ interface DefaultLayoutProps {
 export default function LinkButton({
   href,
   isDisabled = false,
-  isActive = true,
+  isActive = false,
   children,
 }: DefaultLayoutProps) {
   const buttonStyle = {
@@ -23,8 +23,13 @@ export default function LinkButton({
     <Link
       href={href}
       className={`py-2 px-4 rounded-md border-2 text-xs hover:shadow transition-all
-        ${!isDisabled ? buttonStyle.normal : buttonStyle.disabled}
-        ${!isActive ? buttonStyle.normal : buttonStyle.active}
+      ${
+        isDisabled
+          ? buttonStyle.disabled
+          : isActive
+          ? buttonStyle.active
+          : buttonStyle.normal
+      }
       `}
     >
       {children}
