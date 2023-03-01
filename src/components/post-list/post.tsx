@@ -6,7 +6,7 @@ export default function Post({ post }: { post: PostType }) {
   const { mbti, username, album, title, created_at, likes_num, avatar } = post;
 
   return (
-    <li className="w-full h-24 flex gap-4 items-center justify-between border-b-2">
+    <li className="w-full h-24 max-h-24 flex gap-4 items-center justify-between border-b-2">
       <div className="flex flex-col items-center">
         <Image
           className="w-10 h-12 rounded-full bg-gray-400"
