@@ -7,15 +7,15 @@
       "posts": [
         {
           "id": 0,
-          "title": "제목0"
+          "title": "게시글 제목0"
         },
         {
           "id": 1,
-          "title": "제목1"
+          "title": "게시글 제목1"
         },
         {
           "id": 2,
-          "title": "제목2"
+          "title": "게시글 제목2"
         }
       ]
     },
@@ -26,11 +26,11 @@
       "posts": [
         {
           "id": 0,
-          "title": "제목0"
+          "title": "게시글 제목0"
         },
         {
           "id": 1,
-          "title": "제목1"
+          "title": "게시글 제목1"
         }
       ]
     }
@@ -40,10 +40,10 @@
       "id": 0,
       "src": "/",
       "mbti": "MBTI",
-      "username": "유저1",
+      "username": "유저0",
       "avatar": "/",
       "album": "The Weeknd & Ariana Grande - Die For You",
-      "title": "제목1",
+      "title": "게시글 제목0",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -57,10 +57,10 @@
       "id": 1,
       "src": "/",
       "mbti": "MBTI",
-      "username": "유저0",
+      "username": "유저1",
       "avatar": "/",
       "album": "Lil Baby, Fridayy - Forever",
-      "title": "제목1",
+      "title": "게시글 제목1",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
