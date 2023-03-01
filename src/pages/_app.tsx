@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import "tailwindcss/tailwind.css";
 import "@/styles/input.css";
 
-import { DefaultLayout } from "@/layouts/default-layout";
+import DefaultLayout from "@/layouts/default-layout";
 import FontProvider from "@/common/font-provider";
 import Head from "next/head";
 

@@ -1,14 +1,10 @@
 import { useRouter } from "next/router";
-import * as dummyUsers from "@/dummy.json";
 
-interface User {
-  id: number;
-  username: string;
-  posts: {
-    id: number;
-    title: string;
-  }[];
-}
+import { User } from "@/models/user";
+
+import CardLayout from "@/layouts/card-layout";
+
+import * as dummyUsers from "@/dummy.json";
 
 const getUsers = async () => {
   const users: User[] = dummyUsers.users;
@@ -19,8 +15,7 @@ const getUsers = async () => {
  * 각 "user"를 컴포넌트에 props로 전달
  *
  * 유저 페이지의 static props,
- * 함수에서 데이터 패칭할 경우
- * useSWR와 같은 훅은 사용할 수 없음
+ * 함수에서 데이터 패칭하므로 useSWR와 같은 훅은 사용할 수 없음
  */
 export async function getStaticProps({
   params,
@@ -39,7 +34,7 @@ export async function getStaticProps({
   };
 }
 
-/** 유저 페이지 paths */
+/** 유저 페이지 static paths */
 export async function getStaticPaths() {
   const users = await getUsers();
 
@@ -61,7 +56,7 @@ function ProfilePage({ user }: { user: User }) {
 
   if (!user) return <>props 잘못됨</>;
 
-  return <div>유저명 : {user.username}</div>;
+  return <CardLayout>유저명 : {user.username}</CardLayout>;
 }
 
 export default ProfilePage;
