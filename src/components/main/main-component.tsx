@@ -17,33 +17,34 @@ export default function MainComponent() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-full">
+    <div className="flex flex-row h-full">
       <div
-        className="px-8 py-10 w-0 rounded-lg flex flex-col drop-shadow-xl scroll-p-2 overflow-y-scroll scrollbar-hide overflow-x-hidden bg-light-gray transition-all"
+        className="px-8 w-full md:w-0 rounded-lg flexdrop-shadow-xl scrollbar-hide overflow-x-hidden bg-light-gray transition-all"
         style={{
           transition: "width 0.5s ease-in-out",
           width: `${width}%`,
         }}
       >
         <div
-          className="opacity-0"
+          className="opacity-0 h-full flex flex-col justify-between"
           style={{
             transition: "opacity 0.3s ease-in-out",
             opacity: opacity,
           }}
         >
-          <div className="mb-2">
+          <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
             <h1 className="text-2xl font-bold">사이트</h1>
             <h3 className="text-lg font-bold">사이트에 대한 소개소개</h3>
           </div>
 
           <PostList />
 
-          <div className="mt-10 flex items-center justify-between">
-            <Pagination />
-
-            <LinkButton href={"/write"}>글 쓰기</LinkButton>
-          </div>
+          <footer className="pt-4 h-24">
+            <div className="flex items-center justify-between">
+              <Pagination />
+              <LinkButton href={"/write"}>글 쓰기</LinkButton>
+            </div>
+          </footer>
         </div>
       </div>
 

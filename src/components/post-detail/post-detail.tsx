@@ -1,3 +1,4 @@
+import Scrollable from "@/layouts/scrollable";
 import { Post } from "@/models/post";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -35,30 +36,39 @@ export default function PostDetail({ post }: { post: Post }) {
 
       <AlbumCover>
         <div className="py-40 px-16">
-          <h2 className="text-4xl font-bold mb-4">{title}</h2>
-          <p>{album}</p>
+          <h1 className="text-4xl font-bold mb-4">{title}</h1>
+          <h2>{album}</h2>
         </div>
       </AlbumCover>
 
-      {/* 댓글 리스트 */}
       <div
-        className="py-10 px-8"
+        className="px-8 flex flex-col justify-between"
         style={{ transition: "width 0.5s ease-in-out", width: `${width}%` }}
       >
-        <ul
-          className="opacity-0"
-          style={{
-            transition: "opacity 0.3s ease-in-out",
-            opacity: opacity,
-          }}
-        >
-          {comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
-        </ul>
+        <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
+          <h3 className="text-lg font-bold">{title}</h3>
+        </div>
 
-        <div className="mt-10 flex items-center justify-between">
-          <LinkButton href={"/write"}>댓글 쓰기</LinkButton>
+        {/* 댓글 리스트 */}
+        <Scrollable>
+          <ul
+            className="opacity-0"
+            style={{
+              transition: "opacity 0.3s ease-in-out",
+              opacity: opacity,
+            }}
+          >
+            {comments.map((comment) => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+          </ul>
+        </Scrollable>
+
+        <div className="pt-4 h-24">
+          <div className="flex items-center justify-between">
+            <button>이전</button>
+            <LinkButton href={"/write"}>댓글 쓰기</LinkButton>
+          </div>
         </div>
       </div>
     </div>
