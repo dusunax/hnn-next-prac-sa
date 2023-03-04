@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 
-import { User } from "@/models/user";
+import { UserData } from "@/models/user";
 
 import CardLayout from "@/layouts/card-layout";
 
 import * as dummyUsers from "@/dummy.json";
 
 const getUsers = async () => {
-  const users: User[] = dummyUsers.users;
+  const users: UserData[] = dummyUsers.users;
   return await users;
 };
 
@@ -49,7 +49,7 @@ export async function getStaticPaths() {
 }
 
 /** pathname의 '@username' 값으로 유저를 찾습니다.  */
-function ProfilePage({ user }: { user: User }) {
+export default function ProfilePage({ user }: { user: UserData }) {
   const router = useRouter();
   const { username } = router.query;
   if (username?.indexOf("@") !== 0) return <>유저를 찾을 수 없습니다.</>;
@@ -58,5 +58,3 @@ function ProfilePage({ user }: { user: User }) {
 
   return <CardLayout>유저명 : {user.username}</CardLayout>;
 }
-
-export default ProfilePage;

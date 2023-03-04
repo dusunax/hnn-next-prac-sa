@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Post as PostType } from "@/models/post";
+import { PostData as PostType } from "@/models/post";
 
 export default function Post({ post }: { post: PostType }) {
   const { mbti, username, album, title, created_at, likes_num, avatar } = post;

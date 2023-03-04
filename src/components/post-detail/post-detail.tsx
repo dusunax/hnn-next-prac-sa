@@ -1,12 +1,12 @@
 import Scrollable from "@/layouts/scrollable";
-import { Post } from "@/models/post";
+import { PostData } from "@/models/post";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import AlbumCover from "../elements/album-cover/album-cover";
 import LinkButton from "../elements/button/link-button";
 import Comment from "./comments/comment";
 
-export default function PostDetail({ post }: { post: Post }) {
+export default function PostDetail({ post }: { post: PostData }) {
   const {
     id,
     src,
