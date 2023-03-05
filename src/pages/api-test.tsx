@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
 export default function ApiTest() {
-  const NEXT_PUBLIC_API = process.env.NEXT_PUBLIC_API;
+  const NEXT_API_URL = process.env.NEXT_API_URL;
 
   useEffect(() => {
-    if (!NEXT_PUBLIC_API) return;
-    fetch(NEXT_PUBLIC_API + "/auth/signup", {
+    if (!NEXT_API_URL) return;
+    fetch(NEXT_API_URL + "/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,10 +17,10 @@ export default function ApiTest() {
         password: "password123",
       }),
     })
-      // fetch(NEXT_PUBLIC_API + "/auth/login/google")
+      // fetch(NEXT_API_URL + "/auth/login/google")
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
-  }, [NEXT_PUBLIC_API]);
+  }, [NEXT_API_URL]);
 
   return <>api-test</>;
 }

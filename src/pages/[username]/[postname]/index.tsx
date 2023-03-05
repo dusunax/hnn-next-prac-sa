@@ -2,10 +2,10 @@ import PostDetail from "@/components/post-detail/post-detail";
 import dummy from "@/dummy.json";
 import CardLayout from "@/layouts/card-layout";
 
-import { Post } from "@/models/post";
+import { PostData } from "@/models/post";
 
 const getPosts = async () => {
-  const posts: Post[] = dummy.posts;
+  const posts: PostData[] = dummy.posts;
   return await posts;
 };
 
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 }
 
 /** pathname의 '@postname' 값으로 포스트를 찾습니다.  */
-export default function PostPage({ post }: { post: Post }) {
+export default function PostPage({ post }: { post: PostData }) {
   // 여기에서 SWR 사용할 수 있음
 
   return (

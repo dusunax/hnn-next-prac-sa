@@ -1,11 +1,11 @@
-export interface Comment {
+export interface CommentData {
   id: number;
   text: string;
   username: string;
   avatar: string;
 }
 
-export interface Post {
+export interface PostData {
   id: number;
   src: string;
   mbti: string;
@@ -15,5 +15,5 @@ export interface Post {
   title: string;
   created_at: string;
   likes_num: number;
-  comments: Comment[];
+  comments: CommentData[];
 }

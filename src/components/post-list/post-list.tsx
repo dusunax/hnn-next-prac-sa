@@ -3,7 +3,7 @@ import Link from "next/link";
 import Post from "./post";
 import Scrollable from "@/layouts/scrollable";
 
-import { Post as PostType } from "@/models/post";
+import { PostData as PostType } from "@/models/post";
 
 import dummy from "@/dummy.json";
 
