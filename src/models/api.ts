@@ -4,8 +4,12 @@ export interface ResponseType {
   data: any;
 }
 
-export interface AuthResponseType extends ResponseType {
-  data: {
-    appToken: string;
-  };
+export interface AuthResponseType {
+  appToken: string;
+}
+
+export interface ErrorType {
+  error: string;
+  message: string;
+  statusCode: number;
 }

@@ -33,3 +33,7 @@ html {
     @apply w-full h-full bg-light-gray drop-shadow-xl rounded-lg overflow-hidden relative;
   }
 }
+
+.temp-text {
+  @apply text-sm text-red-600 block;
+}

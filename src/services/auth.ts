@@ -1,5 +1,6 @@
 import { CLIENT } from ".";
-import { ResponseType } from "@/models/api";
+import { AuthResponseType, ErrorType, ResponseType } from "@/models/api";
+import { AxiosError } from "axios";
 
 interface UserAuth {
   email: string;
@@ -7,40 +8,30 @@ interface UserAuth {
 }
 
 /** 가입 */
-export async function signUpService(payload: UserAuth): Promise<ResponseType> {
+export async function signUpService(
+  payload: UserAuth
+): Promise<AuthResponseType | ErrorType> {
   try {
     const res = await CLIENT.post("/auth/signup", payload);
-    const data = res.data;
-
-    console.log(res);
-
-    return {
-      success: true,
-      message: "성공",
-      data: { appToken: data.token },
-    };
-  } catch (e) {
-    // res의 메시지 확인
-    return { success: false, message: "회원 가입에 실패", data: "" };
+    return res.data;
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
   }
 }
 
 /** 로그인 */
-export async function signInService(payload: UserAuth): Promise<ResponseType> {
+export async function signInService(
+  payload: UserAuth
+): Promise<AuthResponseType | ErrorType> {
   try {
-    const res = await CLIENT.post("/", payload);
-    const data = res.data;
-
+    const res = await CLIENT.post("/auth", payload);
     console.log(res);
 
-    return {
-      success: true,
-      message: "성공",
-      data: { appToken: data.token },
-    };
-  } catch (e) {
-    // res의 메시지 확인
-    return { success: false, message: "실패", data: "" };
+    return res.data;
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
   }
 }
 
@@ -50,17 +41,10 @@ export async function signInService(payload: UserAuth): Promise<ResponseType> {
 export default async function googleLoginService(): Promise<ResponseType> {
   try {
     const res = await CLIENT.get("/auth/login/google");
-
-    console.log(res);
-
-    return {
-      success: true,
-      message: "성공",
-      data: "",
-    };
-  } catch (e) {
-    // res의 메시지 확인
-    return { success: false, message: "실패", data: "" };
+    return res.data;
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ResponseType;
+    return errorResponse;
   }
 }
 
@@ -70,17 +54,9 @@ export default async function googleLoginService(): Promise<ResponseType> {
 export async function naverLoginService(): Promise<ResponseType> {
   try {
     const res = await CLIENT.get("/auth/login/naver");
-    const data = res.data;
-
-    console.log(res);
-
-    return {
-      success: true,
-      message: "성공",
-      data: { appToken: data.token },
-    };
-  } catch (e) {
-    // res의 메시지 확인
-    return { success: false, message: "실패", data: "" };
+    return res.data;
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ResponseType;
+    return errorResponse;
   }
 }

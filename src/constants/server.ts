@@ -1,1 +1,2 @@
-export const API_URL = process.env.NEXT_API_URL;
+// PUBLIC 필수..!
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;

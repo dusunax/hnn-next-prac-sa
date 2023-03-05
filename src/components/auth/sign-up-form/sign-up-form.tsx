@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
-export default function SignInForm() {
+import Spiner from "@/components/elements/spiner/spiner";
+
+export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isLoading, error, signUp } = useAuth();
@@ -9,7 +11,6 @@ export default function SignInForm() {
   /** onSubmit 시 회원 가입을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     signUp({ email, password });
   }
 
@@ -34,6 +35,8 @@ export default function SignInForm() {
         />
       </div>
       <button type="submit">클릭!</button>
+      <div>{isLoading && <Spiner />}</div>
+      <div className="temp-text">{error && error}</div>
     </form>
   );
 }
