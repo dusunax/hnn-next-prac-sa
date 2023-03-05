@@ -1,0 +1,191 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "username": "유저0",
+      "avatar": "/",
+      "posts": [
+        {
+          "id": 0,
+          "title": "게시글 제목0"
+        },
+        {
+          "id": 1,
+          "title": "게시글 제목1"
+        },
+        {
+          "id": 2,
+          "title": "게시글 제목2"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "username": "유저1",
+      "avatar": "/",
+      "posts": [
+        {
+          "id": 0,
+          "title": "게시글 제목0"
+        },
+        {
+          "id": 1,
+          "title": "게시글 제목1"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "유저2",
+      "avatar": "/",
+      "posts": [
+        {
+          "id": 0,
+          "title": "게시글 제목0"
+        },
+        {
+          "id": 1,
+          "title": "게시글 제목1"
+        }
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": 0,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저0",
+      "avatar": "/",
+      "album": "The Weeknd & Ariana Grande - Die For You",
+      "title": "게시글 제목0",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 1,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저1",
+      "avatar": "/",
+      "album": "Lil Baby, Fridayy - Forever",
+      "title": "게시글 제목1",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 2,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "KAROL G, Shakira - TQG",
+      "title": "게시글 제목2",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 3,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "SZA - Kill Bill",
+      "title": "게시글 제목3",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 4,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "Beyoncé - CUFF IT",
+      "title": "게시글 제목4",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 5,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "Steve Lacy - Bad Habit",
+      "title": "게시글 제목5",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 6,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "딱 10cm만 - 10CM & BIG Naughty",
+      "title": "게시글 제목6",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    },
+    {
+      "id": 7,
+      "src": "/",
+      "mbti": "MBTI",
+      "username": "유저2",
+      "avatar": "/",
+      "album": "Bones - Imagine Dragons",
+      "title": "게시글 제목7",
+      "created_at": "0000-00-00",
+      "likes_num": 99,
+      "comments": [
+        { "id": 0, "text": "댓글1", "username": "유저0", "avatar": "/" },
+        { "id": 1, "text": "댓글2", "username": "유저1", "avatar": "/" },
+        { "id": 2, "text": "댓글2", "username": "유저0", "avatar": "/" },
+        { "id": 3, "text": "댓글3", "username": "유저1", "avatar": "/" }
+      ]
+    }
+  ]
+}
