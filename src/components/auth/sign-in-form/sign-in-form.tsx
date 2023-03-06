@@ -8,7 +8,7 @@ export default function SignInForm() {
   const [password, setPassword] = useState("");
   const { isLoading, error, signIn } = useAuth();
 
-  /** onSubmit 시 회원 가입을 요청합니다. */
+  /** onSubmit 시 로그인을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
