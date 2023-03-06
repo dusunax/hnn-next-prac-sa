@@ -2,24 +2,32 @@ import { useEffect, useState } from "react";
 import { PostData } from "@/models/post";
 import { RetrunType } from "@/models/api";
 
+import Cookies from "js-cookie";
+
 import {
   createPostService,
   deletePostService,
   fetchAllPostsService,
   fetchPostService,
   updatePostService,
+  writeRequestType,
 } from "@/services/posts";
 
 interface UsePostsReturnType extends RetrunType {
   posts: PostData[];
+  // CRUD
   fetchPost: (postId: number) => Promise<void>;
   fetchAllPosts: () => Promise<void>;
-  createPost: (postData: PostData) => Promise<void>;
+  createPost: (postData: writeRequestType) => Promise<void>;
   updatePost: (postId: number, postData: PostData) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
+  // 임시저장
+  getTempPostData: () => writeRequestType | null;
+  setTempPostData: (data: writeRequestType) => void;
+  clearTempPostData: () => void;
 }
 
-export default function usePosts(): UsePostsReturnType {
+export default function useCRUD(): UsePostsReturnType {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [posts, setPosts] = useState<PostData[]>([]);
@@ -64,12 +72,13 @@ export default function usePosts(): UsePostsReturnType {
     setIsLoading(false);
   };
 
-  const createPost = async (postData: PostData) => {
+  const createPost = async (postData: writeRequestType) => {
     setIsLoading(true);
 
     console.log("게시글 작성(api 연결 후 handler 수정)");
+    console.log(postData);
 
-    const response = await createPostService(postData);
+    // const response = await createPostService(postData);
 
     // if ("message" in response) {
     //   setError(response.message);
@@ -114,6 +123,22 @@ export default function usePosts(): UsePostsReturnType {
     setIsLoading(false);
   };
 
+  // 임시 저장된 게시글 데이터 가져오기
+  const getTempPostData = (): writeRequestType | null => {
+    const tempData = Cookies.get("tempPostData");
+    return tempData ? JSON.parse(tempData) : null;
+  };
+
+  // 임시 저장된 게시글 데이터 저장하기
+  const setTempPostData = (data: writeRequestType): void => {
+    Cookies.set("tempPostData", JSON.stringify(data));
+  };
+
+  // 임시 저장된 게시글 데이터 삭제하기
+  const clearTempPostData = (): void => {
+    Cookies.remove("tempPostData");
+  };
+
   return {
     posts,
     isLoading,
@@ -123,5 +148,8 @@ export default function usePosts(): UsePostsReturnType {
     createPost,
     updatePost,
     deletePost,
+    getTempPostData,
+    setTempPostData,
+    clearTempPostData,
   };
 }

@@ -13,6 +13,7 @@ export interface PostData {
   avatar: string;
   album: string;
   title: string;
+  description: string;
   created_at: string;
   likes_num: number;
   comments: CommentData[];

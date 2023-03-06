@@ -5,7 +5,11 @@ import { ErrorType } from "@/models/api";
 
 // request & response 타입 아직 x
 // (api 연결 후 타입 수정 필요)
-interface PostRequestType {}
+export interface writeRequestType {
+  title: PostData["title"];
+  description: PostData["description"];
+  album: PostData["album"];
+}
 interface PostResponseType {}
 
 /** [api] 전체 posts fetch */
@@ -38,10 +42,10 @@ export const fetchPostService = async (
 
 /** [api] post 작성 */
 export const createPostService = async (
-  post: PostData
+  postData: writeRequestType
 ): Promise<PostData | ErrorType> => {
   try {
-    const res = await CLIENT.post("/posts", post);
+    const res = await CLIENT.post("/posts", postData);
 
     return res.data;
   } catch (e: AxiosError | any) {
