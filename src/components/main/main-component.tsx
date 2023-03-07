@@ -44,8 +44,8 @@ export default function MainComponent() {
           }}
         >
           <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
-            <h1 className="text-2xl font-bold">사이트</h1>
-            <h3 className="text-lg font-bold">사이트에 대한 소개소개</h3>
+            <h1 className="font-bold">사이트</h1>
+            <h3 className="font-bold">사이트에 대한 소개소개</h3>
           </div>
 
           <PostList />
