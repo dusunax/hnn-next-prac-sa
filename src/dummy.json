@@ -7,15 +7,18 @@
       "posts": [
         {
           "id": 0,
-          "title": "게시글 제목0"
+          "title": "게시글 제목0",
+          "description": ""
         },
         {
           "id": 1,
-          "title": "게시글 제목1"
+          "title": "게시글 제목1",
+          "description": ""
         },
         {
           "id": 2,
-          "title": "게시글 제목2"
+          "title": "게시글 제목2",
+          "description": ""
         }
       ]
     },
@@ -26,11 +29,13 @@
       "posts": [
         {
           "id": 0,
-          "title": "게시글 제목0"
+          "title": "게시글 제목0",
+          "description": ""
         },
         {
           "id": 1,
-          "title": "게시글 제목1"
+          "title": "게시글 제목1",
+          "description": ""
         }
       ]
     },
@@ -41,11 +46,13 @@
       "posts": [
         {
           "id": 0,
-          "title": "게시글 제목0"
+          "title": "게시글 제목0",
+          "description": ""
         },
         {
           "id": 1,
-          "title": "게시글 제목1"
+          "title": "게시글 제목1",
+          "description": ""
         }
       ]
     }
@@ -59,6 +66,7 @@
       "avatar": "/",
       "album": "The Weeknd & Ariana Grande - Die For You",
       "title": "게시글 제목0",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -76,6 +84,7 @@
       "avatar": "/",
       "album": "Lil Baby, Fridayy - Forever",
       "title": "게시글 제목1",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -93,6 +102,7 @@
       "avatar": "/",
       "album": "KAROL G, Shakira - TQG",
       "title": "게시글 제목2",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명설명 설명명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -110,6 +120,7 @@
       "avatar": "/",
       "album": "SZA - Kill Bill",
       "title": "게시글 제목3",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -127,6 +138,7 @@
       "avatar": "/",
       "album": "Beyoncé - CUFF IT",
       "title": "게시글 제목4",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -144,6 +156,7 @@
       "avatar": "/",
       "album": "Steve Lacy - Bad Habit",
       "title": "게시글 제목5",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -161,6 +174,7 @@
       "avatar": "/",
       "album": "딱 10cm만 - 10CM & BIG Naughty",
       "title": "게시글 제목6",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
@@ -178,6 +192,7 @@
       "avatar": "/",
       "album": "Bones - Imagine Dragons",
       "title": "게시글 제목7",
+      "description": "설명 설명설명 설명입니다. 설명설 명 성명설설명 설명입니명 설명입니다. 명 성명설명 설명입니다.",
       "created_at": "0000-00-00",
       "likes_num": 99,
       "comments": [
