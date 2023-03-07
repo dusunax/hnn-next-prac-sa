@@ -1,4 +1,4 @@
-import WriteComponent from "@/components/write/write-component";
+import WriteComponent from "@/components/crud/write/write-component";
 import CardLayout from "@/layouts/card-layout";
 
 export default function WritePage() {

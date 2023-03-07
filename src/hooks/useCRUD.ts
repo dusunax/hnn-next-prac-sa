@@ -13,18 +13,19 @@ import {
   writeRequestType,
 } from "@/services/posts";
 
+// api 요청 service + return type + error throw
 interface UsePostsReturnType extends RetrunType {
   posts: PostData[];
   // CRUD
   fetchPost: (postId: number) => Promise<void>;
   fetchAllPosts: () => Promise<void>;
   createPost: (postData: writeRequestType) => Promise<void>;
-  updatePost: (postId: number, postData: PostData) => Promise<void>;
+  updatePost: (postId: number, postData: Partial<PostData>) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   // 임시저장
-  getTempPostData: () => writeRequestType | null;
-  setTempPostData: (data: writeRequestType) => void;
-  clearTempPostData: () => void;
+  getDraftData: () => writeRequestType | null;
+  setDraftData: (data: writeRequestType) => void;
+  clearDraftData: () => void;
 }
 
 export default function useCRUD(): UsePostsReturnType {
@@ -56,7 +57,7 @@ export default function useCRUD(): UsePostsReturnType {
   };
 
   /** post를 작성합니다. */
-  const fetchPost = async (postId: number) => {
+  const fetchPost: UsePostsReturnType["fetchPost"] = async (postId) => {
     setIsLoading(true);
 
     console.log("게시글 패칭(api 연결 후 handler 수정)");
@@ -72,7 +73,7 @@ export default function useCRUD(): UsePostsReturnType {
     setIsLoading(false);
   };
 
-  const createPost = async (postData: writeRequestType) => {
+  const createPost: UsePostsReturnType["createPost"] = async (postData) => {
     setIsLoading(true);
 
     console.log("게시글 작성(api 연결 후 handler 수정)");
@@ -89,7 +90,10 @@ export default function useCRUD(): UsePostsReturnType {
     setIsLoading(false);
   };
 
-  const updatePost = async (postId: number, postData: PostData) => {
+  const updatePost: UsePostsReturnType["updatePost"] = async (
+    postId,
+    postData
+  ) => {
     setIsLoading(true);
 
     console.log("게시글 수정(api 연결 후 handler 수정)");
@@ -107,12 +111,12 @@ export default function useCRUD(): UsePostsReturnType {
     setIsLoading(false);
   };
 
-  const deletePost = async (postId: number) => {
+  const deletePost: UsePostsReturnType["deletePost"] = async (postId) => {
     setIsLoading(true);
 
     console.log("게시글 삭제(api 연결 후 handler 수정)");
 
-    // const response = await deletePostService(postId);
+    // const response: UsePostsReturnType["response"] = await deletePostService(postId);
 
     // if ("message" in response) {
     //   setError(response.message);
@@ -124,19 +128,19 @@ export default function useCRUD(): UsePostsReturnType {
   };
 
   // 임시 저장된 게시글 데이터 가져오기
-  const getTempPostData = (): writeRequestType | null => {
-    const tempData = Cookies.get("tempPostData");
+  const getDraftData: UsePostsReturnType["getDraftData"] = () => {
+    const tempData = Cookies.get("draft");
     return tempData ? JSON.parse(tempData) : null;
   };
 
   // 임시 저장된 게시글 데이터 저장하기
-  const setTempPostData = (data: writeRequestType): void => {
-    Cookies.set("tempPostData", JSON.stringify(data));
+  const setDraftData: UsePostsReturnType["setDraftData"] = (data) => {
+    Cookies.set("draft", JSON.stringify(data));
   };
 
   // 임시 저장된 게시글 데이터 삭제하기
-  const clearTempPostData = (): void => {
-    Cookies.remove("tempPostData");
+  const clearDraftData: UsePostsReturnType["clearDraftData"] = () => {
+    Cookies.remove("draft");
   };
 
   return {
@@ -148,8 +152,8 @@ export default function useCRUD(): UsePostsReturnType {
     createPost,
     updatePost,
     deletePost,
-    getTempPostData,
-    setTempPostData,
-    clearTempPostData,
+    getDraftData,
+    setDraftData,
+    clearDraftData,
   };
 }

@@ -1,4 +1,5 @@
 import { CLIENT } from ".";
+import { API_URL } from "@/constants/server";
 
 // api 요청 결과 & 에러 메시지를 반환
 import { ErrorType, ResponseType } from "@/models/api";
@@ -46,13 +47,7 @@ export async function signInService(
 export default async function googleLoginService(): Promise<
   ResponseType | ErrorType | void
 > {
-  try {
-    const res = await CLIENT.get("/auth/login/google");
-    return res.data;
-  } catch (e: AxiosError | any) {
-    const errorResponse = e.response.data.message as ErrorType;
-    return errorResponse;
-  }
+  location.replace(API_URL + "/auth/login/google");
 }
 
 /** [api] 네이버 로그인
