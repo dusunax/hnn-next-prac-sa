@@ -27,6 +27,9 @@ export default function MainComponent() {
           <FaSignInAlt size="18" color="#eee" />
           Sign in
         </Link>
+        <Link href="/auth" className="block p-2">
+          Test Page
+        </Link>
       </div>
 
       <div
