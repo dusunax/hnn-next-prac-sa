@@ -1,7 +1,11 @@
-import Scrollable from "@/layouts/scrollable";
-import { PostData } from "@/models/post";
-import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+
+import Scrollable from "@/layouts/scrollable";
+
+import { PostData } from "@/models/post";
+
 import AlbumCover from "../elements/album-cover/album-cover";
 import LinkButton from "../elements/button/link-button";
 import Comment from "./comments/comment";
@@ -17,10 +21,14 @@ export default function PostDetail({ post }: { post: PostData }) {
     created_at,
     likes_num,
     comments,
+    description,
   } = post;
 
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
+
+  const { query } = useRouter();
+  const pathname = `/${query.username}/${query.postname}`;
 
   useEffect(() => {
     setWidth(40);
@@ -36,9 +44,12 @@ export default function PostDetail({ post }: { post: PostData }) {
 
       <AlbumCover>
         <div className="py-40 px-16">
-          <h1 className="text-4xl font-bold mb-4">{title}</h1>
-          <h2>{album}</h2>
+          <h1 className="text-4xl font-bold mb-6">{title}</h1>
+          <h2 className="w-52 mb-4">{album}</h2>
+          <h3 className="w-48">{description}</h3>
         </div>
+
+        <Link href={`${pathname}/edit`}>수정</Link>
       </AlbumCover>
 
       <div
@@ -67,8 +78,10 @@ export default function PostDetail({ post }: { post: PostData }) {
         <div className="pt-4 h-24">
           <div className="flex items-center justify-between">
             <button>이전</button>
-            <LinkButton href={"/write"}>댓글 쓰기</LinkButton>
+            <LinkButton href={"/comment"}>댓글 쓰기</LinkButton>
           </div>
+
+          <div></div>
         </div>
       </div>
     </div>
