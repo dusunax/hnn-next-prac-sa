@@ -1,9 +1,9 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import EditComponent from "../edit-component";
+import { fireEvent, render, waitFor } from "@testing-library/react";
+import EditComponent from "../edit/edit-component";
+import { prevPostDummy } from "../hook/use-edit-form";
 
-describe("EditComponent", () => {
-  // EditComponent가 렌더링되었는지 확인
+describe("Test custom hook: name use-edit-form.tsx", () => {
+  // 컴포넌트 랜더링
   it("renders form with inputs and submit button", async () => {
     const { getByLabelText, getByText } = render(<EditComponent />);
     const albumInput = getByLabelText("노래");
@@ -17,23 +17,34 @@ describe("EditComponent", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  // 버튼을 눌렀을 때, Form submit
-  it("submits form when submit button is clicked", async () => {
+  // 버튼 클릭 시 submit
+  it("file object when submit button is clicked", async () => {
     const { getByLabelText, getByText } = render(<EditComponent />);
     const albumInput = getByLabelText("노래");
     const titleInput = getByLabelText("게시글 제목");
     const descriptionInput = getByLabelText("감상평");
     const submitButton = getByText("submit 클릭!");
 
+    const mockUpdatePost = jest.fn();
+    jest.mock("@/hooks/use-CRUD", () => {
+      return () => {
+        return {
+          isLoading: false,
+          updatePost: mockUpdatePost,
+          getDraftData: jest.fn().mockReturnValue(prevPostDummy),
+        };
+      };
+    });
+
     fireEvent.change(albumInput, { target: { value: "Album name" } });
     fireEvent.change(titleInput, { target: { value: "Post title" } });
     fireEvent.change(descriptionInput, {
       target: { value: "Post description" },
     });
-    fireEvent.click(submitButton);
+    fireEvent.submit(submitButton);
 
     await waitFor(() => {
-      // isLoading이 true일 때, 스피너를 표시
+      // submit 후에 발생하는 테스트 코드
     });
   });
 });

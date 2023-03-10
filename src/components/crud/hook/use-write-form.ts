@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUD from "@/hooks/useCRUD";
+import useCRUD from "@/hooks/use-CRUD";
 import { FormReturnType } from "@/models/form";
 
 interface Register {

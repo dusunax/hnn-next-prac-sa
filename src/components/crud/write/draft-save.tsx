@@ -1,4 +1,4 @@
-import useCRUD from "@/hooks/useCRUD";
+import useCRUD from "@/hooks/use-CRUD";
 import { Dispatch, SetStateAction } from "react";
 
 interface Draft {

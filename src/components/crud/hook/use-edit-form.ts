@@ -1,10 +1,10 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUD from "@/hooks/useCRUD";
+import useCRUD from "@/hooks/use-CRUD";
 import { FormReturnType } from "@/models/form";
 
 // 이거 타입 참고
-const prevPost = {
+export const prevPostDummy = {
   id: 999,
   src: "주소",
   mbti: "MBTI",
