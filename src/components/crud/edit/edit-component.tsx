@@ -3,8 +3,10 @@ import Spiner from "@/components/elements/spiner/spiner";
 import useEditForm from "../hook/useEditForm";
 import Input from "@/components/elements/form/input";
 import FileInputWithPreview from "@/components/elements/form/file-input/file-input-component";
-
-export default function EditComponent() {
+interface EditComponentProps {
+  isLoading?: boolean;
+}
+export default function EditComponent(props: EditComponentProps) {
   const { register, isLoading, handleSubmit, draftProps } = useEditForm();
   const {
     file,
@@ -37,7 +39,17 @@ export default function EditComponent() {
           setState={setDescription}
         />
         <button>submit 클릭!</button>
-        <div>{isLoading && <Spiner />}</div>
+        <div>
+          {isLoading && (
+            <div
+              className="spinner"
+              aria-label="로딩 중입니다"
+              role="progressbar"
+            >
+              <Spiner />
+            </div>
+          )}
+        </div>
       </form>
     </div>
   );
