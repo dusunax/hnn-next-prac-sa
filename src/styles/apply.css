@@ -1,0 +1,32 @@
+/* custom named classes */
+
+/* 레이아웃*/
+.card-wrapper {
+  @apply w-full h-full bg-light-gray drop-shadow-xl rounded-lg overflow-hidden relative;
+}
+
+/* 정렬 */
+.absolute-center {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+/* 버튼 button */
+.button-disabled {
+  @apply hover:shadow-none text-slate-400 bg-slate-200 pointer-events-none select-none;
+}
+.button-active {
+  @apply hover:shadow bg-slate-500 text-slate-100 border-slate-500 select-none;
+}
+.button-normal {
+  @apply hover:shadow text-slate-500 border-slate-400 select-none;
+}
+
+.button-size-xs {
+  @apply py-1 px-2 text-xs;
+}
+.button-size-base {
+  @apply py-2 px-4 text-xs;
+}
+.button-size-wide {
+  @apply w-full py-3 text-base;
+}

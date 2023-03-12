@@ -7,11 +7,6 @@
 /* variants : hover & focus & responsive & responsive & dark mode etc */
 @tailwind variants;
 
-body,
-html {
-  background-color: #e3e6e8;
-}
-
 /* 
   Directives (at-rule)
   https://tailwindcss.com/docs/functions-and-directives#apply
@@ -23,17 +18,14 @@ html {
     - !important 설정 가능
 */
 @layer components {
+  /* 제목 */
   h1 {
     @apply text-2xl;
   }
   h2 {
     @apply text-xl;
   }
-  .card-wrapper {
-    @apply w-full h-full bg-light-gray drop-shadow-xl rounded-lg overflow-hidden relative;
+  h3 {
+    @apply text-lg;
   }
-}
-
-.temp-text {
-  @apply text-sm text-red-600 block;
 }

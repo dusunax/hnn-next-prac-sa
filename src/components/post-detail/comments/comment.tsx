@@ -1,4 +1,4 @@
-import { CommentData as CommentType } from "@/models/post";
+import { CommentData as CommentType } from "@/models/post-and-comment";
 import Image from "next/image";
 
 export default function Comment({ comment }: { comment: CommentType }) {

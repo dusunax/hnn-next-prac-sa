@@ -5,14 +5,20 @@ import { FaGoogle, FaSignInAlt } from "react-icons/fa";
 import { SiNaver, SiGoogle } from "react-icons/si";
 
 import LinkButton from "@/components/elements/button/link-button";
-import Pagination from "@/components/pagination/pagination";
 import PostList from "@/components/post-list/post-list";
 import Link from "next/link";
+import PaginationComponent from "@/components/pagination/pagination-component";
 
 export default function MainComponent() {
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
+  // 페이지네이션
+  const [page, setPage] = useState(1);
+  const totalPages = 13;
+  const limit = 3;
+
+  // 트랜지션
   useEffect(() => {
     setWidth(40);
     setTimeout(() => {
@@ -26,6 +32,9 @@ export default function MainComponent() {
         <Link href="/auth/sign-in" className="block p-2">
           <FaSignInAlt size="18" color="#eee" />
           Sign in
+        </Link>
+        <Link href="/auth" className="block p-2">
+          Test Page
         </Link>
       </div>
 
@@ -44,15 +53,21 @@ export default function MainComponent() {
           }}
         >
           <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
-            <h1 className="text-2xl font-bold">사이트</h1>
-            <h3 className="text-lg font-bold">사이트에 대한 소개소개</h3>
+            <h1 className="font-bold">사이트</h1>
+            <h3 className="font-bold">사이트에 대한 소개소개</h3>
           </div>
 
           <PostList />
 
-          <footer className="pt-4 h-24">
-            <div className="flex items-center justify-between">
-              <Pagination />
+          <footer className="h-24">
+            <div className="text-right">
+              <PaginationComponent
+                page={page}
+                setPage={setPage}
+                totalPages={totalPages}
+                limit={limit}
+              />
+
               <LinkButton href={"/write"}>글 쓰기</LinkButton>
             </div>
           </footer>

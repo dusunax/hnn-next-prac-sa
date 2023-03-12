@@ -4,10 +4,10 @@ import { UserData } from "@/models/user";
 
 import CardLayout from "@/layouts/card-layout";
 
-import * as dummyUsers from "@/dummy.json";
+import dummyData from "@/dummy.json";
 
 const getUsers = async () => {
-  const users: UserData[] = dummyUsers.users;
+  const users: UserData[] = dummyData.users;
   return await users;
 };
 
