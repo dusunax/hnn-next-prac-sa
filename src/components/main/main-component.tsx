@@ -7,7 +7,7 @@ import { SiNaver, SiGoogle } from "react-icons/si";
 import LinkButton from "@/components/elements/button/link-button";
 import PostList from "@/components/post-list/post-list";
 import Link from "next/link";
-import PaginationComponent from "../pagination/pagination-component";
+import PaginationComponent from "@/components/pagination/pagination-component";
 
 export default function MainComponent() {
   const [width, setWidth] = useState(0);

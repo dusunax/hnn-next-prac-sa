@@ -129,7 +129,7 @@ export default function CommentList({
           </ul>
         </form>
       </Scrollable>
-      
+
       <PaginationComponent
         page={page}
         setPage={setPage}
