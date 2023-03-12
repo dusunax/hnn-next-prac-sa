@@ -12,6 +12,7 @@ import TextArea from "@/components/elements/form/text-area";
 // 훅 & 타입
 import { CommentData } from "@/models/post-and-comment";
 import useCommentForm from "@/hooks/form/use-comment-form";
+import PaginationComponent from "@/components/pagination/pagination-component";
 
 export default function CommentList({
   comments,
@@ -86,7 +87,9 @@ export default function CommentList({
                         showTitle={false}
                       />
                     ) : (
-                      <div className="text-xs w-full">{comment.text}</div>
+                      <div className="text-xs w-full py-2 px-3 ">
+                        {comment.text}
+                      </div>
                     )}
                     <div className="flex-shrink-0 w-12 text-right">
                       {!isEdit && (
@@ -120,6 +123,8 @@ export default function CommentList({
           </ul>
         </form>
       </Scrollable>
+      
+      <PaginationComponent />
 
       <form onSubmit={handleSubmitCreate}>
         <div className="mt-4 h-40">
