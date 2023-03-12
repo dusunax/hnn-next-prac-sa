@@ -25,8 +25,32 @@ export default function CommentList({
 
   const [isEdit, setIsEdit] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(0);
+  const [selectedCommentText, setSelectedCommentText] = useState(
+    comments[selectedCommentId].text
+  );
+  const [printComments, setPrintComments] = useState(comments);
 
   if (!comments) return <></>;
+
+  const editButtonClickHandler = (id: number) => {
+    setIsEdit(!isEdit);
+    setSelectedCommentId(id);
+    setSelectedCommentText(printComments[id].text);
+  };
+
+  const saveButtonClickHandler = (id: number, text: string) => {
+    setIsEdit(!isEdit);
+
+    setPrintComments((prevComments) =>
+      prevComments.map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, text: text };
+          // 여기서 api에 요청보내서 실제 db 댓글도 수정
+        }
+        return comment;
+      })
+    );
+  };
 
   return (
     <>
@@ -40,35 +64,54 @@ export default function CommentList({
               opacity: opacity,
             }}
           >
-            {comments.map((comment) => {
+            {printComments.map((comment) => {
+              const isEditAndSelectedComment =
+                isEdit && comment.id === selectedCommentId;
+
               return (
                 <li
-                  className="w-full py-4 flex gap-6 border-b-2"
+                  className="w-full h-28 py-4 flex gap-6 border-b-2"
                   key={comment.id + comment.username}
                   data-comment_id={comment.id}
                 >
                   <Profile key={comment.id} comment={comment} />
 
                   <div className="flex-1 h-full flex justify-between">
-                    {isEdit ? (
+                    {isEditAndSelectedComment ? (
                       <TextArea
                         name="comment"
                         title="댓글"
-                        value={text}
-                        setState={setText}
+                        value={selectedCommentText}
+                        setState={setSelectedCommentText}
                         showTitle={false}
                       />
                     ) : (
                       <div className="text-xs w-full">{comment.text}</div>
                     )}
-                    <div className="min-w-12 w-12 text-right">
-                      <Button
-                        size="xs"
-                        border={0}
-                        onClick={() => setIsEdit(!isEdit)}
-                      >
-                        수정
-                      </Button>
+                    <div className="flex-shrink-0 w-12 text-right">
+                      {!isEdit && (
+                        <Button
+                          size="xs"
+                          border={0}
+                          onClick={() => editButtonClickHandler(comment.id)}
+                        >
+                          수정
+                        </Button>
+                      )}
+                      {isEditAndSelectedComment && (
+                        <Button
+                          size="xs"
+                          border={0}
+                          onClick={() =>
+                            saveButtonClickHandler(
+                              comment.id,
+                              selectedCommentText
+                            )
+                          }
+                        >
+                          저장
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </li>

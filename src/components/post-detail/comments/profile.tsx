@@ -6,9 +6,9 @@ export default function Profile({ comment }: { comment: CommentType }) {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <Image
-        className="w-8 h-10 rounded-full bg-gray-400"
-        width={32}
-        height={40}
+        className="rounded-full bg-gray-400"
+        width={30}
+        height={30}
         src={avatar}
         alt={username}
       />

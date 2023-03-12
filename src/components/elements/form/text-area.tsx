@@ -27,7 +27,7 @@ export default function TextArea({
         rows={rows}
         maxLength={100}
         onChange={(e) => setState(e.target.value)}
-        className="w-full py-2 px-3 resize-none outline-none text-sm overflow-hidden"
+        className="w-full py-2 px-3 resize-none outline-none text-xs overflow-hidden"
       />
     </div>
   );
