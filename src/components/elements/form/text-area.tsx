@@ -8,6 +8,7 @@ export default function TextArea({
   showTitle = true,
   cols = 22,
   rows = 3,
+  maxLength = 100
 }: {
   name: string;
   title: string;
@@ -16,6 +17,7 @@ export default function TextArea({
   showTitle?: boolean;
   cols?: number;
   rows?: number;
+  maxLength?: number;
 }) {
   return (
     <div className="w-full">
@@ -25,7 +27,7 @@ export default function TextArea({
         value={value}
         cols={cols}
         rows={rows}
-        maxLength={100}
+        maxLength={maxLength}
         onChange={(e) => setState(e.target.value)}
         className="w-full py-2 px-3 resize-none outline-none text-xs overflow-hidden"
       />
