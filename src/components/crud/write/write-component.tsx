@@ -1,4 +1,4 @@
-import useWriteForm from "../../../hooks/form/use-write-form";
+import useWriteForm from "@/hooks/form/use-write-form";
 
 import Spiner from "@/components/elements/spiner/spiner";
 
