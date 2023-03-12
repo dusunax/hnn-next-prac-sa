@@ -1,0 +1,9 @@
+body,
+html {
+  background-color: #e3e6e8;
+}
+
+/* 임시 사용 */
+.temp-text {
+  @apply text-sm text-red-600 block;
+}

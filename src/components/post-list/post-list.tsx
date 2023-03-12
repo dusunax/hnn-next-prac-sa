@@ -3,12 +3,12 @@ import Link from "next/link";
 import Post from "./post";
 import Scrollable from "@/layouts/scrollable";
 
-import { PostData as PostType } from "@/models/post";
+import { PostData as PostType } from "@/models/post-and-comment";
 
-import dummy from "@/dummy.json";
+import dummyData from "@/dummy.json";
 
 export default function PostList() {
-  const posts: PostType | PostType[] = dummy.posts;
+  const posts: PostType | PostType[] = dummyData.posts;
 
   return (
     <Scrollable>

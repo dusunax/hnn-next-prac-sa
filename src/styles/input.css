@@ -7,11 +7,6 @@
 /* variants : hover & focus & responsive & responsive & dark mode etc */
 @tailwind variants;
 
-body,
-html {
-  background-color: #e3e6e8;
-}
-
 /* 
   Directives (at-rule)
   https://tailwindcss.com/docs/functions-and-directives#apply
@@ -33,17 +28,4 @@ html {
   h3 {
     @apply text-lg;
   }
-
-  /* custom classes */
-  .card-wrapper {
-    @apply w-full h-full bg-light-gray drop-shadow-xl rounded-lg overflow-hidden relative;
-  }
-  .absolute-center {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
-  }
-}
-
-/* 임시 사용 */
-.temp-text {
-  @apply text-sm text-red-600 block;
 }

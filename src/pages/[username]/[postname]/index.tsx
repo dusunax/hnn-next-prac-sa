@@ -1,11 +1,11 @@
 import PostDetail from "@/components/post-detail/post-detail";
-import dummy from "@/dummy.json";
+import dummyData from "@/dummy.json";
 import CardLayout from "@/layouts/card-layout";
 
-import { PostData } from "@/models/post";
+import { PostData } from "@/models/post-and-comment";
 
 const getPosts = async () => {
-  const posts: PostData[] = dummy.posts;
+  const posts: PostData[] = dummyData.posts;
   return await posts;
 };
 
