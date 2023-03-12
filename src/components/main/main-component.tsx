@@ -13,6 +13,12 @@ export default function MainComponent() {
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
+  // 페이지네이션
+  const [page, setPage] = useState(1);
+  const totalPages = 13;
+  const limit = 3;
+
+  // 트랜지션
   useEffect(() => {
     setWidth(40);
     setTimeout(() => {
@@ -55,7 +61,13 @@ export default function MainComponent() {
 
           <footer className="h-24">
             <div className="text-right">
-              <PaginationComponent />
+              <PaginationComponent
+                page={page}
+                setPage={setPage}
+                totalPages={totalPages}
+                limit={limit}
+              />
+
               <LinkButton href={"/write"}>글 쓰기</LinkButton>
             </div>
           </footer>
