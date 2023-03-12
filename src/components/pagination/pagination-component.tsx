@@ -16,11 +16,13 @@ export interface Pagination {
   setPage: Dispatch<React.SetStateAction<number>>;
 }
 
-export default function PaginationComponent() {
-  const [page, setPage] = useState(1);
-  const limit = 3;
+export default function PaginationComponent({
+  page,
+  setPage,
+  totalPages,
+  limit,
+}: Pagination) {
   const block = Math.floor((page - 1) / limit) * limit; // 각 10의 단위
-  const totalPages = 13;
 
   const isFirstPage = page === 1;
   const isFirstBlock = block === 0;
