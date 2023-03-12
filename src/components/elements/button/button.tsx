@@ -1,4 +1,4 @@
-interface DefaultLayoutProps {
+interface ButtonProps {
   children: React.ReactNode;
   isDisabled?: boolean;
   isActive?: boolean;
@@ -14,7 +14,7 @@ export default function Button({
   onClick = () => {},
   size = "base",
   border = 2,
-}: DefaultLayoutProps) {
+}: ButtonProps) {
   const buttonSize = `button-size-${size}`;
   const buttonStatus = isDisabled
     ? "button-disabled"
