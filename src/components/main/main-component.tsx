@@ -5,9 +5,9 @@ import { FaGoogle, FaSignInAlt } from "react-icons/fa";
 import { SiNaver, SiGoogle } from "react-icons/si";
 
 import LinkButton from "@/components/elements/button/link-button";
-import Pagination from "@/components/pagination/pagination";
 import PostList from "@/components/post-list/post-list";
 import Link from "next/link";
+import PaginationComponent from "../pagination/pagination-component";
 
 export default function MainComponent() {
   const [width, setWidth] = useState(0);
@@ -53,9 +53,9 @@ export default function MainComponent() {
 
           <PostList />
 
-          <footer className="pt-4 h-24">
-            <div className="flex items-center justify-between">
-              <Pagination />
+          <footer className="h-24">
+            <div className="text-right">
+              <PaginationComponent />
               <LinkButton href={"/write"}>글 쓰기</LinkButton>
             </div>
           </footer>
