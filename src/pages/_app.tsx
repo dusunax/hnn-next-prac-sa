@@ -2,6 +2,8 @@ import type { AppProps } from "next/app";
 
 import "tailwindcss/tailwind.css";
 import "@/styles/input.css";
+import "@/styles/global.css";
+import "@/styles/apply.css";
 
 import DefaultLayout from "@/layouts/default-layout";
 import FontProvider from "@/common/font-provider";

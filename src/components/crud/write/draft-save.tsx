@@ -1,4 +1,4 @@
-import useCRUD from "@/hooks/use-CRUD";
+import useDraft from "@/hooks/crud/use-draft";
 import { Dispatch, SetStateAction } from "react";
 
 interface Draft {
@@ -20,7 +20,7 @@ export default function Draft({
   setAlbum,
   clearPost,
 }: Draft) {
-  const { getDraftData, setDraftData, clearDraftData } = useCRUD();
+  const { getDraftData, setDraftData, clearDraftData } = useDraft();
 
   const saveDraftHandler = () => {
     console.log("임시저장: " + title, description, album);

@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import EditComponent from "../edit/edit-component";
-import { prevPostDummy } from "../hook/use-edit-form";
+import { prevPostDummy } from "../../../hooks/form/use-edit-form";
 
 describe("Test custom hook: name use-edit-form.tsx", () => {
   // 컴포넌트 랜더링

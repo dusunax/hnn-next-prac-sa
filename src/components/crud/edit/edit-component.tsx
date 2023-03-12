@@ -1,6 +1,6 @@
 import Spiner from "@/components/elements/spiner/spiner";
 
-import useEditForm from "../hook/use-edit-form";
+import useEditForm from "../../../hooks/form/use-edit-form";
 import Input from "@/components/elements/form/input";
 import FileInputWithPreview from "@/components/elements/form/file-input/file-input-component";
 interface EditComponentProps {
