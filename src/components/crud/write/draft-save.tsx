@@ -1,5 +1,5 @@
-import useDraft from "@/hooks/crud/use-draft";
 import { Dispatch, SetStateAction } from "react";
+import useDraft from "@/hooks/crud/use-draft";
 
 interface Draft {
   title: string;
@@ -23,7 +23,6 @@ export default function Draft({
   const { getDraftData, setDraftData, clearDraftData } = useDraft();
 
   const saveDraftHandler = () => {
-    console.log("임시저장: " + title, description, album);
     setDraftData({ title, description, album });
   };
 
@@ -40,6 +39,7 @@ export default function Draft({
     clearDraftData();
     clearPost();
   };
+  
   return (
     <>
       <button onClick={saveDraftHandler}>임시저장</button>
