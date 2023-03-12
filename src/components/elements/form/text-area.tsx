@@ -1,27 +1,33 @@
 import { Dispatch, SetStateAction } from "react";
 
-export default function Input({
+export default function TextArea({
   name,
   title,
   value,
   setState,
   showTitle = true,
+  cols = 22,
+  rows = 3,
 }: {
   name: string;
   title: string;
   value: string;
   setState: Dispatch<SetStateAction<string>>;
   showTitle?: boolean;
+  cols?: number;
+  rows?: number;
 }) {
   return (
-    <div>
+    <div className="w-full">
       {showTitle && <label htmlFor={name}>{title}</label>}
-      <input
-        className="w-full text-sm outline-none px-2 py-1"
+      <textarea
         id={name}
-        type="text"
         value={value}
+        cols={cols}
+        rows={rows}
+        maxLength={100}
         onChange={(e) => setState(e.target.value)}
+        className="w-full py-2 px-3 resize-none outline-none text-xs overflow-hidden"
       />
     </div>
   );

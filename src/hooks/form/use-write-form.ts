@@ -1,7 +1,8 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUD from "@/hooks/useCRUD";
+import useCRUDPost from "@/hooks/crud/use-crud-post-and-comment";
 import { FormReturnType } from "@/models/form";
+import useDraft from "@/hooks/crud/use-draft";
 
 interface Register {
   file: File | null;
@@ -25,7 +26,9 @@ interface UseWriteFormReturnType extends FormReturnType {
 
 // form 기능
 export default function useWriteForm(): UseWriteFormReturnType {
-  const { isLoading, createPost, getDraftData } = useCRUD();
+  const { isLoading, createPost } = useCRUDPost();
+  const { getDraftData } = useDraft();
+
   const [draft, setDraft] = useState(getDraftData());
 
   const [title, setTitle] = useState(draft?.title || "");

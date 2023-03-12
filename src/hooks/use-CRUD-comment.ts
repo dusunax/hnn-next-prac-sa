@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PostData } from "@/models/post";
+import { PostData } from "@/models/post-and-comment";
 import { RetrunType } from "@/models/api";
 
 import Cookies from "js-cookie";
@@ -11,7 +11,7 @@ import {
   fetchPostService,
   updatePostService,
   writeRequestType,
-} from "@/services/posts";
+} from "@/services/post";
 
 // api 요청 service + return type + error throw
 interface UsePostsReturnType extends RetrunType {

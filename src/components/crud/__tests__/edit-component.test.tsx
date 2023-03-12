@@ -1,8 +1,8 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import EditComponent from "../edit-component";
+import EditComponent from "../edit/edit-component";
 
-describe("EditComponent", () => {
+describe("Test Component: EditComponent.tsx", () => {
   // EditComponent가 렌더링되었는지 확인
   it("renders form with inputs and submit button", async () => {
     const { getByLabelText, getByText } = render(<EditComponent />);
@@ -30,9 +30,10 @@ describe("EditComponent", () => {
     fireEvent.change(descriptionInput, {
       target: { value: "Post description" },
     });
-    fireEvent.click(submitButton);
+    fireEvent.submit(submitButton);
 
     await waitFor(() => {
+      // submit 후에 발생하는 테스트 코드
       // isLoading이 true일 때, 스피너를 표시
     });
   });

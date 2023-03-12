@@ -1,6 +1,6 @@
 import { CLIENT } from ".";
 import { AxiosError } from "axios";
-import { PostData } from "@/models/post";
+import { PostData } from "@/models/post-and-comment";
 import { ErrorType } from "@/models/api";
 
 // request & response 타입 아직 x
