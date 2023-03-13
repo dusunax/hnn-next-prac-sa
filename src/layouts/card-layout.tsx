@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
+
+import logoSrc from "@public/logo.png";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -9,9 +12,9 @@ export default function CardLayout({ children }: DefaultLayoutProps) {
     <div className="card-wrapper">
       <Link
         href="/"
-        className="absolute z-20 top-4 left-4 w-16 h-16 bg-orange-300"
+        className="w-10 h-10 absolute z-20 top-4 left-4 hover:animate-ping"
       >
-        홈
+        <Image src={logoSrc} width={40} height={40} alt={"로고"} />
       </Link>
       {children}
     </div>

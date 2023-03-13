@@ -57,8 +57,7 @@ export async function naverLoginService(): Promise<
   ResponseType | ErrorType | void
 > {
   try {
-    const res = await CLIENT.get("/auth/login/naver");
-    return res.data;
+    location.replace(API_URL + "/auth/login/naver");
   } catch (e: AxiosError | any) {
     const errorResponse = e.response.data.message as ErrorType;
     return errorResponse;
