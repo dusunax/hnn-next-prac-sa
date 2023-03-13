@@ -110,7 +110,6 @@ export default function useAuth(): UseAuthReturnType {
       console.log(error);
     } finally {
       deleteTokenHandler();
-      setIsLoading(false);
     }
   };
 
@@ -135,9 +134,7 @@ export default function useAuth(): UseAuthReturnType {
       console.log(error);
     } finally {
       deleteTokenHandler();
-      setIsLoading(false);
-    }
   };
-
+  
   return { isLoading, isLogin, error, signUp, signIn, token };
 }
