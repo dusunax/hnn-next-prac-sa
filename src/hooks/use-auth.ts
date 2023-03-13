@@ -63,8 +63,8 @@ export default function useAuth(): UseAuthReturnType {
     setToken("");
   };
 
-  // 토큰 해독 함수
-  const jwt_decode = (token: string): any | null => {
+  // (호이스팅) 토큰 해독 함수
+  function jwt_decode(token: string): any | null {
     try {
       const decoded = jwt.decode(token);
       return decoded;
@@ -72,7 +72,7 @@ export default function useAuth(): UseAuthReturnType {
       console.log(err);
       return null;
     }
-  };
+  }
 
   /** (호이스팅) 토큰 vaild여부를 확인하고 boolean 리턴 */
   function checkIsTokenVaild(appToken: string): boolean {
