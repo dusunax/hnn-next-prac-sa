@@ -31,13 +31,12 @@ export default function useAuth(): UseAuthReturnType {
 
   useEffect(() => {
     if (queryToken !== undefined && typeof queryToken !== "object") {
-      // newTokenHandler와 같은 기능
+      // newTokenHandler, checkIsTokenVaild와 같은 기능
       (function (appToken: string) {
-        const isTokenValid = checkIsTokenVaild(appToken);
+        const tokenExp = jwt_decode(appToken)?.exp;
+        const isTokenValid =
+          appToken !== undefined && tokenExp < Date.now() / 1000;
         if (!isTokenValid) return;
-
-        console.log(jwt_decode(queryToken));
-        // console.log();
 
         saveToken(appToken);
         setToken(appToken);
@@ -46,17 +45,17 @@ export default function useAuth(): UseAuthReturnType {
     }
 
     error && console.log(error);
-  }, [queryToken, error, checkIsTokenVaild]);
+  }, [queryToken, error]);
 
-  /** (호이스팅)새 토큰  */
-  function newTokenHandler(appToken: string) {
+  /** 새 토큰  */
+  const newTokenHandler = (appToken: string) => {
     const isTokenValid = checkIsTokenVaild(appToken);
     if (!isTokenValid) return;
 
     saveToken(appToken);
     setToken(appToken);
     setIsLogin(true);
-  }
+  };
 
   /** 토큰 삭제 */
   const deleteTokenHandler = () => {
@@ -64,7 +63,7 @@ export default function useAuth(): UseAuthReturnType {
     setToken("");
   };
 
-  // 토큰 해독 함수
+  // (호이스팅) 토큰 해독 함수
   function jwt_decode(token: string): any | null {
     try {
       const decoded = jwt.decode(token);
@@ -75,7 +74,7 @@ export default function useAuth(): UseAuthReturnType {
     }
   }
 
-  /** (호이스팅)토큰 vaild여부를 확인하고 boolean 리턴 */
+  /** (호이스팅) 토큰 vaild여부를 확인하고 boolean 리턴 */
   function checkIsTokenVaild(appToken: string): boolean {
     const tokenExp = jwt_decode(token)?.exp;
     if (!tokenExp) return false;
@@ -110,7 +109,6 @@ export default function useAuth(): UseAuthReturnType {
       console.log(error);
     } finally {
       deleteTokenHandler();
-      setIsLoading(false);
     }
   };
 
@@ -135,7 +133,6 @@ export default function useAuth(): UseAuthReturnType {
       console.log(error);
     } finally {
       deleteTokenHandler();
-      setIsLoading(false);
     }
   };
 

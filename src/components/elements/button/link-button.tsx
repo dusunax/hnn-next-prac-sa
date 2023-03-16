@@ -5,6 +5,7 @@ interface DefaultLayoutProps {
   href: string;
   isDisabled?: boolean;
   isActive?: boolean;
+  className?: string;
 }
 
 export default function LinkButton({
@@ -12,11 +13,12 @@ export default function LinkButton({
   isDisabled = false,
   isActive = false,
   children,
+  className,
 }: DefaultLayoutProps) {
   return (
     <Link
       href={href}
-      className={`py-2 px-4 rounded-md border-2 text-xs hover:shadow transition-all
+      className={`${className} py-2 px-4 rounded-md border-2 text-xs hover:shadow transition-all
       ${
         isDisabled
           ? "button-disabled"

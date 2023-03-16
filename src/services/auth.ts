@@ -44,7 +44,7 @@ export async function signInService(
 /** [api] 구글 로그인
  *  @redirect redirect "http://localhost:3690/auth/callback?accessToken=token"
  */
-export default async function googleLoginService(): Promise<
+export async function googleLoginService(): Promise<
   ResponseType | ErrorType | void
 > {
   location.replace(API_URL + "/auth/login/google");
