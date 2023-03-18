@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/use-auth";
 
 import Spiner from "@/components/elements/spiner/spiner";
+import { randomNicknameService } from "@/services/user";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");

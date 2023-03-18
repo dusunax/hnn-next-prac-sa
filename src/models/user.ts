@@ -7,7 +7,14 @@ export interface UserData {
   }[];
 }
 
-export interface AuthData {
-  email: string;
-  password: string;
+// 유저 : 전역으로 사용할 recoil state
+export interface UserState {
+  id: number | null;
+  iat: number | null;
+  mbti: string;
+  nickname: string;
+  token: string;
+  MBTI: string;
+  gender: string;
+  profilePicture: string;
 }

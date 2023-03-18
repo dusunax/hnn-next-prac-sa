@@ -11,7 +11,7 @@ export default function SignInPage() {
       <h1>로그인</h1>
 
       <LinkButton
-        href="/auth/sign-in"
+        href="/auth/sign-up"
         className="block p-2 bg-[#4f5554] rounded-full"
       >
         가입하기

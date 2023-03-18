@@ -1,11 +1,13 @@
 import Cookies from "js-cookie";
 
 export function saveToken(appToken: string) {
-  Cookies.set("appToken", JSON.stringify(appToken));
+  Cookies.set("appToken", appToken);
 }
 
 export function getToken(): string | undefined {
-  return Cookies.get("appToken");
+  const storedToken = Cookies.get("appToken");
+
+  return storedToken;
 }
 
 export function removeToken() {

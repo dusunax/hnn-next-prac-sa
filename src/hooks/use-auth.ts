@@ -4,24 +4,43 @@ import jwt from "jsonwebtoken";
 
 import { getToken, saveToken, removeToken } from "@/utils/storageToken";
 import { signInService, signUpService } from "@/services/auth";
+import { randomNicknameService, getLoggedInUserData } from "@/services/user";
 
-import { AuthData } from "@/models/user";
 import { RetrunType } from "@/models/api";
 
+import { useRecoilState } from "recoil";
+import { userState } from "@/store/user";
+
+// 유저 : 회원가입에 사용할 request 타입
+export interface RegisterRequestType {
+  email: string;
+  password: string;
+}
 interface UseAuthReturnType extends RetrunType {
-  signUp: (data: AuthData) => void;
-  signIn: (data: AuthData) => void;
+  signUp: (data: RegisterRequestType) => void;
+  signIn: (data: RegisterRequestType) => void;
   token: string | undefined;
   isLogin: boolean;
 }
 
-export default function useAuth(): UseAuthReturnType {
-  //cookie에서 토큰을 가져옵니다.
-  const localToken = getToken() || "";
+const CALLBACK_PATH = "/auth/callback";
+const initialUser = {
+  id: null,
+  iat: null,
+  mbti: "",
+  token: "",
+  nickname: "",
+  MBTI: "",
+  gender: "",
+  profilePicture: "",
+};
 
-  // query에서 accessToken 값을 가져옵니다.
+export default function useAuth(): UseAuthReturnType {
+  const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
-  const { accessToken: queryToken } = router.query;
+
+  // cookie에서 토큰을 가져옵니다.
+  const localToken = getToken() || "";
 
   const [token, setToken] = useState(localToken);
   const [isLogin, setIsLogin] = useState(checkIsTokenVaild(localToken));
@@ -29,29 +48,42 @@ export default function useAuth(): UseAuthReturnType {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  /**
+   * 액세스 토큰을 확인합니다.
+   * */
   useEffect(() => {
-    if (queryToken !== undefined && typeof queryToken !== "object") {
-      // newTokenHandler, checkIsTokenVaild와 같은 기능
-      (function (appToken: string) {
-        const tokenExp = jwt_decode(appToken)?.exp;
-        const isTokenValid =
-          appToken !== undefined && tokenExp < Date.now() / 1000;
-        if (!isTokenValid) return;
+    const newAccessToken = router?.query?.accessToken;
+    if (!(location.pathname === CALLBACK_PATH)) return;
+    if (typeof newAccessToken !== "string") return;
 
-        saveToken(appToken);
-        setToken(appToken);
-        setIsLogin(true);
-      })(queryToken);
-    }
+    (async function (appToken: string) {
+      newTokenHandler(appToken);
+      setIsLogin(true);
+
+      const userData = await getLoggedInUserData();
+
+      if ("MBTI" in userData) {
+        console.log(userData);
+
+        const userToSave = {
+          ...initialUser,
+          mbti: userData.MBTI,
+          username: userData.nickname,
+          token: appToken,
+          gender: userData.gender,
+          profilePicture: userData.profilePicture,
+        };
+
+        setUser(userToSave);
+        // router.push("/");
+      }
+    })(newAccessToken);
 
     error && console.log(error);
-  }, [queryToken, error]);
+  }, [error, router?.query?.accessToken, setUser]);
 
   /** 새 토큰  */
   const newTokenHandler = (appToken: string) => {
-    const isTokenValid = checkIsTokenVaild(appToken);
-    if (!isTokenValid) return;
-
     saveToken(appToken);
     setToken(appToken);
     setIsLogin(true);
@@ -74,12 +106,13 @@ export default function useAuth(): UseAuthReturnType {
     }
   }
 
-  /** (호이스팅) 토큰 vaild여부를 확인하고 boolean 리턴 */
+  /**
+   * (호이스팅) 토큰 valid여부를 확인하고 boolean 리턴
+   * 그런데 지금 토큰 invalid인 경우가 없음
+   * */
   function checkIsTokenVaild(appToken: string): boolean {
     const tokenExp = jwt_decode(token)?.exp;
     if (!tokenExp) return false;
-    console.log(tokenExp);
-
     const isTokenValid = appToken !== undefined && tokenExp < Date.now() / 1000;
 
     if (isTokenValid) {
@@ -92,7 +125,7 @@ export default function useAuth(): UseAuthReturnType {
   /** 회원가입 요청을 보냅니다.
    * 요청이 성공하면 토큰을 저장하고, 메인으로 이동합니다.
    * send request to api, redirect to main */
-  const signUp = async (data: AuthData) => {
+  const signUp = async (data: RegisterRequestType) => {
     try {
       setIsLoading(true);
       const response = await signUpService(data);
@@ -115,7 +148,7 @@ export default function useAuth(): UseAuthReturnType {
   /** 로그인 요청을 보냅니다.
    * 요청이 성공하면 토큰을 저장하고, 메인으로 이동합니다.
    * send request to api, redirect to main */
-  const signIn = async (data: AuthData) => {
+  const signIn = async (data: RegisterRequestType) => {
     try {
       setIsLoading(true);
       const response = await signInService(data);
@@ -125,7 +158,23 @@ export default function useAuth(): UseAuthReturnType {
         const appToken = response.appToken;
         newTokenHandler(appToken);
 
-        router.push("/");
+        const userData = await getLoggedInUserData();
+
+        if ("MBTI" in userData) {
+          console.log(userData);
+
+          const userToSave = {
+            ...initialUser,
+            mbti: userData.MBTI,
+            username: userData.nickname,
+            token: appToken,
+            gender: userData.gender,
+            profilePicture: userData.profilePicture,
+          };
+
+          setUser(userToSave);
+          // router.push("/");
+        }
       } else {
         setError(response.message);
       }
@@ -136,5 +185,12 @@ export default function useAuth(): UseAuthReturnType {
     }
   };
 
-  return { isLoading, isLogin, error, signUp, signIn, token };
+  return {
+    isLoading,
+    isLogin,
+    error,
+    signUp,
+    signIn,
+    token,
+  };
 }

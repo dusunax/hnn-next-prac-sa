@@ -1,7 +1,7 @@
 import { CLIENT } from ".";
 import { API_URL } from "@/constants/server";
 
-// api 요청 결과 & 에러 메시지를 반환
+// 기본 return타입
 import { ErrorType, ResponseType } from "@/models/api";
 import { AxiosError } from "axios";
 
