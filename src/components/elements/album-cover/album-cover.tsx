@@ -1,3 +1,6 @@
+import Image from "next/image";
+// import src from "@public/banner/1.png";
+
 interface Props {
   children?: React.ReactNode;
   borderRadiusStyle?: string;
@@ -12,6 +15,7 @@ export default function AlbumCover({ children, borderRadiusStyle }: Props) {
         className="absolute w-full h-full bg-gradient-to-b from-[#3a6570] to-transparent
   block"
       />
+      {/* <Image src={src} alt={"이미지"} fill className=" object-cover" /> */}
       <div className="absolute w-full h-full">{children}</div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 const mbtiOptions = [
   {
@@ -32,14 +32,12 @@ const mbtiOptions = [
 ];
 
 export default function MBTISelect({
-  mbti = ["", "", "", ""],
+  mbti,
   setMbti,
 }: {
   mbti: string[];
   setMbti: Dispatch<SetStateAction<string[]>>;
 }) {
-  // const [mbti, setMbti] = useState(["", "", "", ""]);
-
   const handleChange = (
     index: number,
     event: React.ChangeEvent<HTMLSelectElement>
@@ -51,6 +49,7 @@ export default function MBTISelect({
 
   return (
     <div>
+      <h3>MBTI(필수)</h3>
       {mbtiOptions.map((group, index) => (
         <div key={index}>
           <label>{group.label}</label>

@@ -2,7 +2,7 @@ import { CommentData as CommentType } from "@/models/post-and-comment";
 import Image from "next/image";
 
 export default function Profile({ comment }: { comment: CommentType }) {
-  const { username, avatar } = comment;
+  const { nickname, avatar } = comment;
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <Image
@@ -10,9 +10,9 @@ export default function Profile({ comment }: { comment: CommentType }) {
         width={30}
         height={30}
         src={avatar}
-        alt={username}
+        alt={nickname}
       />
-      <span className="text-xs">{username}</span>
+      <span className="text-xs">{nickname}</span>
     </div>
   );
 }

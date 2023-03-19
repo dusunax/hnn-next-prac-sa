@@ -38,7 +38,7 @@ export async function getStaticPaths() {
 
   const paths = posts.map((post) => ({
     params: {
-      username: post.username,
+      nickname: post.nickname,
       postname: post.title, // 프리 랜더링할 페이지(uri)
     },
   }));

@@ -1,16 +1,16 @@
-import { UserState } from "@/models/user";
+import { UserStateType } from "@/models/user";
+import { getToken } from "@/utils/storageToken";
 import { atom } from "recoil";
 
-export const userState = atom<UserState>({
+export const userState = atom<UserStateType>({
   key: "userState",
   default: {
     id: null,
-    iat: null,
-    mbti: "",
+    MBTI: "",
     token: "",
     nickname: "",
-    MBTI: "",
     gender: "",
     profilePicture: "",
+    isLogin: false,
   },
 });

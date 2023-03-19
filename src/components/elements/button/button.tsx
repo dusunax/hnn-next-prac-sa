@@ -31,6 +31,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
+      disabled={isDisabled}
       className={`${className} ${buttonSize} ${buttonStatus} ${buttonBorder} rounded-md transition-all`}
     >
       {children}

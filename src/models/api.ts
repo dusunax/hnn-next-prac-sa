@@ -13,6 +13,6 @@ export interface ErrorType {
 }
 
 export interface RetrunType {
-  error: string;
+  error: string | Error | undefined;
   isLoading: boolean;
 }

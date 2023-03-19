@@ -6,7 +6,7 @@ import useCRUD, { UseCRUDReturnType } from "../crud/use-crud-post-and-comment";
 export const prevCommentDummy = {
   id: 3,
   text: "댓글3",
-  username: "유저1",
+  nickname: "유저1",
   avatar: "/",
 };
 

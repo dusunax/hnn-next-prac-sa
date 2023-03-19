@@ -33,3 +33,12 @@
 .button-size-wide {
   @apply w-full py-3 text-base;
 }
+
+.animate-slide-in-right {
+  transition: all 0.3s;
+  transform: translateX(100%);
+}
+
+.parent:hover .animate-slide-in-right {
+  transform: translateX(0);
+}

@@ -14,11 +14,11 @@ export default function PostList() {
     <Scrollable>
       <ul className="h-full flex-1 overflow-y-scroll scrollbar-hide overflow-x-hidden">
         {posts.map((post, idx) => {
-          const username = post.username;
+          const nickname = post.nickname;
           const postname = post.title;
 
           return (
-            <Link href={`/@${username}/${postname}`} key={idx}>
+            <Link href={`/@${nickname}/${postname}`} key={idx}>
               <Post post={post} />
             </Link>
           );

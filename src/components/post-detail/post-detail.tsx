@@ -13,7 +13,7 @@ export default function PostDetail({ post }: { post: PostData }) {
     id,
     src,
     mbti,
-    username,
+    nickname,
     album,
     title,
     created_at,
@@ -26,7 +26,7 @@ export default function PostDetail({ post }: { post: PostData }) {
   const [opacity, setOpacity] = useState(0);
 
   const { query } = useRouter();
-  const pathname = `/${query.username}/${query.postname}`;
+  const pathname = `/${query.nickname}/${query.postname}`;
 
   useEffect(() => {
     setWidth(40);
