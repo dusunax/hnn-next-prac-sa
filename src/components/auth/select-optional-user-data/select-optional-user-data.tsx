@@ -64,7 +64,7 @@ export default function SelectOptionalUserData() {
             className="cursor-pointer"
             onClick={() => setNameFetch(!nameFetch)}
           >
-            당신의 닉네임은?
+            {nickname.value ? "다른 닉네임? " : "당신의 닉네임은?"}
           </Button>
 
           <h1
