@@ -48,25 +48,33 @@ export default function MBTISelect({
   };
 
   return (
-    <div>
-      <h3>MBTI(필수)</h3>
-      {mbtiOptions.map((group, index) => (
-        <div key={index}>
-          <label>{group.label}</label>
-          <select
-            value={mbti[index]}
-            onChange={(event) => handleChange(index, event)}
-          >
-            <option value="">선택</option>
-            {group.options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
+    <div className="flex flex-col gap-4 text-center items-center">
+      <h4 className="w-40 bg-black text-white">MBTI(필수)</h4>
+      <div className="flex gap-4">
+        {mbtiOptions.map((group, index) => (
+          <div key={index}>
+            <select
+              className={`w-14 h-14 rounded-full font-lato text-center outline-none shadow-lg`}
+              value={mbti[index]}
+              onChange={(event) => handleChange(index, event)}
+            >
+              <option value="" className="text-gray-300">
+                {group.label}
               </option>
-            ))}
-          </select>
-        </div>
-      ))}
-      <div>선택된 MBTI: {mbti.join("")}</div>
+              {group.options.map((option) => (
+                <option
+                  key={option.value}
+                  value={option.value}
+                  className={"text-blue-500"}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+      <h1 className="h-11 text-4xl font-bold">{mbti.join("")}</h1>
     </div>
   );
 }

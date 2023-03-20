@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ["var(--roboto)"],
+        lato: ["var(--lato)"],
       },
       colors: {
         "light-gray": "#f2f4f5",

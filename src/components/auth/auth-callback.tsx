@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
+import useAuth from "@/hooks/use-auth";
+
 import { useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
 
+import CardLayoutCenter from "@/layouts/card-layout-center";
 import SelectOptionalUserData from "./select-optional-user-data/select-optional-user-data";
-import useAuth from "@/hooks/use-auth";
 
 export default function AuthCallback() {
   const user = useRecoilValue(userState);
@@ -20,9 +22,20 @@ export default function AuthCallback() {
   }, [user, router]);
 
   return (
-    <>
-      <h2>정보를 입력하세요.</h2>
+    <CardLayoutCenter>
+      <div className="mb-6 text-center">
+        <h1 className="mb-4 font-bold">
+          <strong className="font-lato text-2lg">MBTI</strong> 입력하기
+        </h1>
+        <p className="text-sm">
+          서비스를 사용하기 위해
+          <br />
+          당신의 <strong className="font-lato text-2lg"> MBTI</strong> 를
+          입력해주세요.
+        </p>
+      </div>
+
       <SelectOptionalUserData />
-    </>
+    </CardLayoutCenter>
   );
 }

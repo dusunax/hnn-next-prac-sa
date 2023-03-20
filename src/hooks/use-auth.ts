@@ -10,7 +10,6 @@ import { RetrunType } from "@/models/api";
 import { useRecoilState } from "recoil";
 import { userState } from "@/store/user";
 import { UserStateType } from "@/models/user";
-import { useRouter } from "next/router";
 
 // 유저 : 회원가입에 사용할 request 타입
 export interface RegisterRequestType {
@@ -39,11 +38,12 @@ export default function useAuth(): UseAuthReturnType {
   const paramsToken = useSearchParam("accessToken");
 
   // 토큰을 가져옵니다.
-  const localToken = paramsToken || getToken();
+  const localToken = getToken();
 
   // localToken에서 유저 정보를 가져옵니다.
-  const newUserState = useAsync(async (localToken) => {
-    saveToken(paramsToken || localToken);
+  const newUserState = useAsync(async () => {
+    const currentToken = paramsToken || localToken || "";
+    saveToken(paramsToken || localToken || "");
 
     if (user.id !== null) return;
     const userData = await getLoggedInUserData();
@@ -53,13 +53,13 @@ export default function useAuth(): UseAuthReturnType {
         ...initialUser,
         MBTI: userData.MBTI,
         nickname: userData.nickname,
-        token: localToken,
+        token: currentToken,
         gender: userData.gender,
         profilePicture: userData.profilePicture,
         isLogin: true,
       });
     }
-  }, []);
+  }, [paramsToken]);
 
   /** 새 토큰  */
   const newTokenHandler = (appToken: string) => {
