@@ -39,7 +39,7 @@ export default function SignInForm() {
       <button type="submit">클릭!</button>
 
       <div>{isLoading && <Spiner />}</div>
-      <div className="temp-text">{error && error}</div>
+      <div className="temp-text">{typeof error === "string" && error}</div>
     </form>
   );
 }

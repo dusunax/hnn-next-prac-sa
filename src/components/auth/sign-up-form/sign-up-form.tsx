@@ -6,12 +6,12 @@ import Spiner from "@/components/elements/spiner/spiner";
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoading, error, signUp } = useAuth();
+  const { isLoading, error, signUpFn } = useAuth();
 
   /** onSubmit 시 회원 가입을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    signUp({ email, password });
+    signUpFn({ email, password });
   }
 
   return (
@@ -36,7 +36,7 @@ export default function SignUpForm() {
       </div>
       <button type="submit">클릭!</button>
       <div>{isLoading && <Spiner />}</div>
-      <div className="temp-text">{error && error}</div>
+      <div className="temp-text">{typeof error === "string" && error}</div>
     </form>
   );
 }
