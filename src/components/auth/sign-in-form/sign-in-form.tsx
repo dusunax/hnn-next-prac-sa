@@ -7,13 +7,13 @@ import { randomNicknameService } from "@/services/user";
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoading, error, signIn } = useAuth();
+  const { isLoading, error, signInFn } = useAuth();
 
   /** onSubmit 시 로그인을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    signIn({ email, password });
+    signInFn({ email, password });
   }
 
   return (
