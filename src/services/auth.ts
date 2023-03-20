@@ -1,7 +1,7 @@
 import { CLIENT } from ".";
 import { API_URL } from "@/constants/server";
 
-// api 요청 결과 & 에러 메시지를 반환
+// 기본 return타입
 import { ErrorType, ResponseType } from "@/models/api";
 import { AxiosError } from "axios";
 
@@ -44,7 +44,7 @@ export async function signInService(
 /** [api] 구글 로그인
  *  @redirect redirect "http://localhost:3690/auth/callback?accessToken=token"
  */
-export default async function googleLoginService(): Promise<
+export async function googleLoginService(): Promise<
   ResponseType | ErrorType | void
 > {
   location.replace(API_URL + "/auth/login/google");

@@ -78,7 +78,7 @@ export default function CommentList({
               return (
                 <li
                   className="w-full h-28 py-4 flex gap-6 border-b-2"
-                  key={comment.id + comment.username}
+                  key={comment.id + comment.nickname}
                   data-comment_id={comment.id}
                 >
                   <Profile key={comment.id} comment={comment} />

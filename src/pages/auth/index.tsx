@@ -1,10 +1,12 @@
+import Link from "next/link";
+
 import useAuth from "@/hooks/use-auth";
-import googleLoginService, {
+import {
+  googleLoginService,
   naverLoginService,
   signInService,
   signUpService,
 } from "@/services/auth";
-import Link from "next/link";
 
 export default function AuthPage() {
   const dummy = { email: "test5@example.com", password: "111111" };

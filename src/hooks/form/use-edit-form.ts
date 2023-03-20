@@ -9,7 +9,7 @@ export const prevPostDummy = {
   id: 999,
   src: "주소",
   mbti: "MBTI",
-  username: "유저명",
+  nickname: "유저명",
   avatar: "/image.png",
   album: "노래내용",
   title: "게시글 제목",

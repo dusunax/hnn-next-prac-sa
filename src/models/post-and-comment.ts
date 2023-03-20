@@ -1,7 +1,7 @@
 export interface CommentData {
   id: number;
   text: string;
-  username: string;
+  nickname: string;
   avatar: string;
 }
 
@@ -9,7 +9,7 @@ export interface PostData {
   id: number;
   src: string;
   mbti: string;
-  username: string;
+  nickname: string;
   avatar: string;
   album: string;
   title: string;

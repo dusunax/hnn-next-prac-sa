@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import AlbumCover from "@/components/elements/album-cover/album-cover";
 
-import { FaGoogle, FaSignInAlt } from "react-icons/fa";
-import { SiNaver, SiGoogle } from "react-icons/si";
-
-import LinkButton from "@/components/elements/button/link-button";
-import PostList from "@/components/post-list/post-list";
-import Link from "next/link";
 import PaginationComponent from "@/components/pagination/pagination-component";
+import PostList from "@/components/post-list/post-list";
+import AlbumCover from "@/components/elements/album-cover/album-cover";
+import LinkButton from "@/components/elements/button/link-button";
+import SocialButtonBox from "@/components/elements/button-box/social-button-box";
+import ProfileButtonBox from "@/components/elements/button-box/profile-button-box";
+
+import { useRecoilValue } from "recoil";
+import { userState } from "@/store/user";
 
 export default function MainComponent() {
+  const user = useRecoilValue(userState);
+  const { isLogin } = user;
+
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
@@ -28,16 +32,6 @@ export default function MainComponent() {
 
   return (
     <div className="flex flex-row h-full relative">
-      <div className="absolute z-10 top-2 right-0">
-        <Link href="/auth/sign-in" className="block p-2">
-          <FaSignInAlt size="18" color="#eee" />
-          Sign in
-        </Link>
-        <Link href="/auth" className="block p-2">
-          Test Page
-        </Link>
-      </div>
-
       <div
         className="px-8 w-full md:w-0 rounded-lg flexdrop-shadow-xl scrollbar-hide overflow-x-hidden bg-light-gray transition-all"
         style={{
@@ -53,8 +47,11 @@ export default function MainComponent() {
           }}
         >
           <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
-            <h1 className="font-bold">사이트</h1>
-            <h3 className="font-bold">사이트에 대한 소개소개</h3>
+            <h1 className="font-bold">흐느넴</h1>
+            <h3 className="font-bold">지금 뭐 듣고 있어?</h3>
+
+            {isLogin && <ProfileButtonBox />}
+            {!isLogin && <SocialButtonBox />}
           </div>
 
           <PostList />
@@ -68,7 +65,9 @@ export default function MainComponent() {
                 limit={limit}
               />
 
-              <LinkButton href={"/write"}>글 쓰기</LinkButton>
+              <LinkButton isDisabled={!isLogin} href={"/write"}>
+                글 쓰기
+              </LinkButton>
             </div>
           </footer>
         </div>

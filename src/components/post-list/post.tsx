@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PostData as PostType } from "@/models/post-and-comment";
 
 export default function Post({ post }: { post: PostType }) {
-  const { mbti, username, album, title, created_at, likes_num, avatar } = post;
+  const { mbti, nickname, album, title, created_at, likes_num, avatar } = post;
 
   return (
     <li className="w-full h-24 max-h-24 flex gap-4 items-center justify-between border-b-2">
@@ -13,9 +13,9 @@ export default function Post({ post }: { post: PostType }) {
           width={40}
           height={40}
           src={avatar}
-          alt={username}
+          alt={nickname}
         />
-        <span className="text-xs">{username}</span>
+        <span className="text-xs">{nickname}</span>
       </div>
 
       <div className="flex-1 flex flex-col">
