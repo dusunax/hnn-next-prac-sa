@@ -4,7 +4,7 @@ import Spiner from "@/components/elements/spiner/spiner";
 
 import Input from "@/components/elements/form/input";
 import DraftSave from "@/components/crud/write/draft-save";
-import FileInputWithPreview from "@/components/elements/form/file-input/file-input-component";
+import FileInputWithPreview from "@/components/elements/form/file-image/file-image-component";
 
 // 컴포넌트 출력
 export default function WriteComponent() {

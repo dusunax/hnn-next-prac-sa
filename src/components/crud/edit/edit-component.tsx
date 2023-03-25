@@ -2,7 +2,7 @@ import Spiner from "@/components/elements/spiner/spiner";
 
 import useEditForm from "@/hooks/form/use-edit-form";
 import Input from "@/components/elements/form/input";
-import FileInputWithPreview from "@/components/elements/form/file-input/file-input-component";
+import FileInputWithPreview from "@/components/elements/form/file-image/file-image-component";
 interface EditComponentProps {
   isLoading?: boolean;
 }

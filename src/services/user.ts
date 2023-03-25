@@ -33,7 +33,7 @@ export async function getLoggedInUserData(): Promise<
 > {
   try {
     const res = await CLIENT.get(`/users`);
-    // console.log(res.data);
+    console.log(res.data);
 
     return res.data;
   } catch (e: AxiosError | any) {
@@ -55,6 +55,30 @@ export async function updateUserProfileService(
     } else {
       console.error("프로필 업데이트에 실패하였습니다.");
       return { message: "실패", statusCode: res.status };
+    }
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
+  }
+}
+
+/** [api] 사용자 프로필 업데이트 */
+export async function updateUserAvatarService(
+  avatar: FormData
+): Promise<Partial<ResponseType> | ErrorType> {
+  try {
+    const res: ErrorType | { success: boolean } = await CLIENT.patch(
+      `/users/picture`,
+      avatar
+    );
+
+    if ("success" in res) {
+      return res;
+    } else {
+      return {
+        message: "프로필 이미지 업데이트 실패",
+        statusCode: res.statusCode,
+      };
     }
   } catch (e: AxiosError | any) {
     const errorResponse = e.response.data.message as ErrorType;

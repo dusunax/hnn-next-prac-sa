@@ -49,7 +49,7 @@ export default function SelectOptionalUserData() {
   };
 
   return (
-    <>
+    <div className="overflow-y-scroll scrollbar-hide">
       <section className="mbti text-center mb-2">
         <SelectMBTI mbti={mbti} setMbti={setMBTI} />
 
@@ -96,6 +96,6 @@ export default function SelectOptionalUserData() {
           저장하기
         </Button>
       </div>
-    </>
+    </div>
   );
 }

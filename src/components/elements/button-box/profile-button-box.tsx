@@ -34,14 +34,6 @@ export default function ProfileButtonBox() {
           className="button-box p-2 absolute flex gap-2 -top-2 -right-2 slide-in-right"
           onMouseLeave={() => setIsHover(false)}
         >
-          {/* 개인 페이지 */}
-          <Link
-            href={`/user/edit`}
-            className="w-8 h-8 flex-center bg-[#4e5a58] rounded-full hover:-translate-y-2 transition-transform"
-          >
-            <FaCog size="14" color="#b2fffa" />
-          </Link>
-
           {/* 로그아웃 */}
           <button
             onClick={signOutFn}
@@ -49,6 +41,14 @@ export default function ProfileButtonBox() {
           >
             <FaSignOutAlt size="14" color="#b2fffa" />
           </button>
+
+          {/* 개인 페이지 */}
+          <Link
+            href={`/user/edit`}
+            className="w-8 h-8 flex-center bg-[#4e5a58] rounded-full hover:-translate-y-2 transition-transform"
+          >
+            <FaCog size="14" color="#b2fffa" />
+          </Link>
         </div>
       )}
     </div>

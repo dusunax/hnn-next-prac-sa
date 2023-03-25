@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import useAuth from "@/hooks/use-auth";
@@ -8,11 +8,14 @@ import { userState } from "@/store/user";
 
 import CardLayoutCenter from "@/layouts/card-layout-center";
 import SelectOptionalUserData from "./select-optional-user-data/select-optional-user-data";
+import FileInputWithPreview from "../elements/form/file-image/file-image-component";
 
 export default function AuthCallback() {
   const user = useRecoilValue(userState);
   const router = useRouter();
   const {} = useAuth();
+
+  const [file, setFile] = useState<File | null>(null);
 
   // 이미 MBTI가 선택되었다면 메인으로 이동합니다.
   useEffect(() => {
@@ -35,6 +38,15 @@ export default function AuthCallback() {
         </p>
       </div>
 
+      <FileInputWithPreview
+        file={file}
+        setFile={setFile}
+        width="w-20"
+        height="h-20"
+        rounded="rounded-full"
+        hasButton={true}
+        imageOnChange={() => {}}
+      />
       <SelectOptionalUserData />
     </CardLayoutCenter>
   );
