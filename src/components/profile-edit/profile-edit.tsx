@@ -3,27 +3,17 @@ import { useState } from "react";
 import SelectOptionalUserData from "../auth/select-optional-user-data/select-optional-user-data";
 import FileInputWithPreview from "../elements/form/file-image/file-image-component";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "@/store/user";
+
 import { updateUserAvatarService } from "@/services/user";
+import useUser from "@/hooks/use-user";
 
 export default function ProfileEdit() {
   const [file, setFile] = useState<File | null>(null);
   const [user, setUser] = useRecoilState(userState);
 
-  const userAvatarUpdate = (newFile: File) => {
-    try {
-      if (newFile) {
-        const formData = new FormData();
-        formData.append("avatar", newFile);
-
-        updateUserAvatarService(formData);
-      }
-    } catch (err) {
-      console.log(err);
-      alert("이미지를 업로드할 수 없습니다.");
-    }
-  };
+  const { userAvatarUpdate } = useUser();
 
   return (
     <>

@@ -9,11 +9,14 @@ import { userState } from "@/store/user";
 import CardLayoutCenter from "@/layouts/card-layout-center";
 import SelectOptionalUserData from "./select-optional-user-data/select-optional-user-data";
 import FileInputWithPreview from "../elements/form/file-image/file-image-component";
+import useUser from "@/hooks/use-user";
 
 export default function AuthCallback() {
   const user = useRecoilValue(userState);
   const router = useRouter();
+
   const {} = useAuth();
+  const { userAvatarUpdate } = useUser();
 
   const [file, setFile] = useState<File | null>(null);
 
@@ -45,7 +48,7 @@ export default function AuthCallback() {
         height="h-20"
         rounded="rounded-full"
         hasButton={true}
-        imageOnChange={() => {}}
+        imageOnChange={userAvatarUpdate}
       />
       <SelectOptionalUserData />
     </CardLayoutCenter>

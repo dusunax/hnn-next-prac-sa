@@ -22,7 +22,11 @@ export default function WriteComponent() {
 
   return (
     <div className="w-3/4 h-3/4 absolute-center">
-      <FileInputWithPreview file={file} setFile={setFile} />
+      <FileInputWithPreview
+        file={file}
+        setFile={setFile}
+        imageOnChange={() => {}}
+      />
       <form onSubmit={handleSubmit}>
         <h1>글 쓰기</h1>
         <div onClick={draftProps.clearPost}>지우기</div>
