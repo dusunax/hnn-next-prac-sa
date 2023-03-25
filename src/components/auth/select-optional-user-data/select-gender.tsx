@@ -23,17 +23,22 @@ export default function SelectGender({
   };
 
   return (
-    <div>
-      <label>성별(선택사항)</label>
-      <select value={gender} onChange={handleChange}>
-        <option value="">선택</option>
+    <>
+      <h4 className="w-40 bg-slate-500 text-white text-center">성별(선택)</h4>
+      <select
+        value={gender}
+        onChange={handleChange}
+        className="py-1 px-3 rounded-md text-lg outline-none shadow-lg"
+      >
+        <option value="" className="text-gray-300">
+          선택
+        </option>
         {genderOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-      <div>선택된 성별: {gender}</div>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { Roboto, Noto_Sans_KR } from "next/font/google";
+import { Lato, Noto_Sans_KR, Gowun_Dodum } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
   // preload: true, 기본값
@@ -6,10 +6,16 @@ const notoSansKr = Noto_Sans_KR({
   weight: ["100", "400", "700", "900"],
 });
 
-const roboto = Roboto({
+const gowunDodum = Gowun_Dodum({
+  // preload: true, 기본값
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const lato = Lato({
   subsets: ["latin"],
   weight: ["100", "400", "700"],
-  variable: "--roboto",
+  variable: "--lato",
 });
 
 export const cls = (...classnames: string[]) => {
@@ -22,6 +28,6 @@ interface DefaultLayoutProps {
 
 export default function FontProvider({ children }: DefaultLayoutProps) {
   return (
-    <div className={cls(notoSansKr.className, roboto.variable)}>{children}</div>
+    <div className={cls(gowunDodum.className, lato.variable)}>{children}</div>
   );
 }

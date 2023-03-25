@@ -4,7 +4,7 @@ import Spiner from "@/components/elements/spiner/spiner";
 
 import Input from "@/components/elements/form/input";
 import DraftSave from "@/components/crud/write/draft-save";
-import FileInputWithPreview from "@/components/elements/form/file-input/file-input-component";
+import FileInputWithPreview from "@/components/elements/form/file-image/file-image-component";
 
 // 컴포넌트 출력
 export default function WriteComponent() {
@@ -22,7 +22,11 @@ export default function WriteComponent() {
 
   return (
     <div className="w-3/4 h-3/4 absolute-center">
-      <FileInputWithPreview file={file} setFile={setFile} />
+      <FileInputWithPreview
+        file={file}
+        setFile={setFile}
+        imageOnChange={() => {}}
+      />
       <form onSubmit={handleSubmit}>
         <h1>글 쓰기</h1>
         <div onClick={draftProps.clearPost}>지우기</div>

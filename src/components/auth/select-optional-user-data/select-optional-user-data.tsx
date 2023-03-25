@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAsync } from "react-use";
 import { useRouter } from "next/router";
 
+import { GiSwordman, GiSwordwoman } from "react-icons/gi";
+
 import {
   randomNicknameService,
   updateUserProfileService,
@@ -10,7 +12,6 @@ import {
 import SelectMBTI from "./select-mbti";
 import SelectGender from "./select-gender";
 import Button from "@/components/elements/button/button";
-import LinkButton from "@/components/elements/button/link-button";
 
 export default function SelectOptionalUserData() {
   const router = useRouter();
@@ -48,38 +49,53 @@ export default function SelectOptionalUserData() {
   };
 
   return (
-    <>
-      <section className="mbti">
+    <div className="overflow-y-scroll scrollbar-hide">
+      <section className="mbti text-center mb-2">
         <SelectMBTI mbti={mbti} setMbti={setMBTI} />
 
         <div className="random-name">
           <div className="h-4 text-xs">
-            {nickname.loading && "불러오는 중"}
+            {nickname.loading && "요청 중..."}
             {nickname.error && "불러오기 실패"}
           </div>
-          <h1>{nickname.value}</h1>
+
           <Button
             isDisabled={mbti.join("").length !== 4}
             className="cursor-pointer"
             onClick={() => setNameFetch(!nameFetch)}
           >
-            다른 이름
+            {nickname.value ? "다른 닉네임? " : "당신의 닉네임은?"}
           </Button>
+
+          <h1
+            className={`${
+              nickname.value ? "" : "shadow-center"
+            } h-20 flex items-center justify-center text-4xl`}
+          >
+            {nickname.value}{" "}
+          </h1>
         </div>
       </section>
 
-      <section className="gender">
+      <section className="gender w-full flex flex-col gap-3 items-center mb-10">
         <SelectGender gender={gender} setGender={setGender} />
+        <h1 className="h-20 flex items-center justify-center text-5xl">
+          {gender === "" && <GiSwordman fill="#ccc" />}
+          {gender === "man" && <GiSwordman />}
+          {gender === "women" && <GiSwordwoman />}
+        </h1>
       </section>
 
-      <Button
-        isDisabled={nickname.value === undefined}
-        className="cursor-pointer"
-        onClick={updateHandler}
-      >
-        저장하기
-      </Button>
-      <LinkButton href="/">메인으로 돌아가기</LinkButton>
-    </>
+      <div className="w-2/3 mx-auto mb-10">
+        <Button
+          isDisabled={nickname.value === undefined}
+          className="cursor-pointer"
+          onClick={updateHandler}
+          size="wide"
+        >
+          저장하기
+        </Button>
+      </div>
+    </div>
   );
 }

@@ -61,3 +61,27 @@ export async function updateUserProfileService(
     return errorResponse;
   }
 }
+
+/** [api] 사용자 프로필 업데이트 */
+export async function updateUserAvatarService(
+  avatar: FormData
+): Promise<Partial<ResponseType> | ErrorType> {
+  try {
+    const res: ErrorType | { success: boolean } = await CLIENT.patch(
+      `/users/picture`,
+      avatar
+    );
+
+    if ("success" in res) {
+      return res;
+    } else {
+      return {
+        message: "프로필 이미지 업데이트 실패",
+        statusCode: res.statusCode,
+      };
+    }
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
+  }
+}
