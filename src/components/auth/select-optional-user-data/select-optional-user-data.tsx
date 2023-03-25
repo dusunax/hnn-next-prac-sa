@@ -86,7 +86,7 @@ export default function SelectOptionalUserData() {
         </h1>
       </section>
 
-      <div className="w-2/3">
+      <div className="w-2/3 mx-auto mb-10">
         <Button
           isDisabled={nickname.value === undefined}
           className="cursor-pointer"

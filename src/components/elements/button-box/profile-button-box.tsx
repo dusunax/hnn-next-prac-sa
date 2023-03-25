@@ -36,7 +36,7 @@ export default function ProfileButtonBox() {
         >
           {/* 개인 페이지 */}
           <Link
-            href={`/user/profile`}
+            href={`/user/edit`}
             className="w-8 h-8 flex-center bg-[#4e5a58] rounded-full hover:-translate-y-2 transition-transform"
           >
             <FaCog size="14" color="#b2fffa" />

@@ -8,8 +8,7 @@ interface DefaultLayoutProps {
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <div className="p-8 box-border h-screen flex justify-center">
-      <div className="w-full max-w-screen-lg flex flex-col">
-        {/* <Header /> */}
+      <div className="h-full w-full max-w-screen-lg flex flex-col">
         {children}
       </div>
     </div>
