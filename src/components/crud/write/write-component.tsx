@@ -8,7 +8,7 @@ import FileInputWithPreview from "@/components/elements/form/file-image/file-ima
 
 // 컴포넌트 출력
 export default function WriteComponent() {
-  const { register, isLoading, handleSubmit, draftProps } = useWriteForm();
+  const { loading, register, handleSubmit, draftProps } = useWriteForm();
   const {
     file,
     setFile,
@@ -44,7 +44,7 @@ export default function WriteComponent() {
           setState={setDescription}
         />
         <button>submit 클릭!</button>
-        <div>{isLoading && <Spiner />}</div>
+        <div>{loading && <Spiner />}</div>
         <DraftSave {...draftProps} />
       </form>
     </div>

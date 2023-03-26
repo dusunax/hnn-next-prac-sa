@@ -20,7 +20,7 @@ interface UseAuthReturnType extends RetrunType {
   signUpFn: (data: RegisterRequestType) => void;
   signInFn: (data: RegisterRequestType) => void;
   signOutFn: () => void;
-  user: UserStateType;
+  user: UserStateType | undefined;
 }
 
 const initialUser: UserStateType = {
@@ -46,18 +46,21 @@ export default function useAuth(): UseAuthReturnType {
     saveToken(paramsToken || localToken || "");
 
     if (user.id !== null) return;
-    const userData = await getLoggedInUserData();
+    const response = await getLoggedInUserData();
 
-    if ("id" in userData) {
-      return setUser({
+    if ("id" in response) {
+      const newUser = {
         ...initialUser,
-        MBTI: userData.MBTI,
-        nickname: userData.nickname,
+        MBTI: response.MBTI,
+        nickname: response.nickname,
         token: currentToken,
-        gender: userData.gender,
-        profilePicture: userData.profilePicture,
+        gender: response.gender,
+        profilePicture: response.profilePicture,
         isLogin: true,
-      });
+      };
+      setUser(newUser);
+
+      return newUser;
     }
   }, [paramsToken]);
 
@@ -121,6 +124,6 @@ export default function useAuth(): UseAuthReturnType {
     signUpFn,
     signInFn,
     signOutFn,
-    user,
+    user: newUserState.value,
   };
 }

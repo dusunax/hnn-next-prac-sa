@@ -2,12 +2,11 @@ import { useState } from "react";
 import useAuth from "@/hooks/use-auth";
 
 import Spiner from "@/components/elements/spiner/spiner";
-import { randomNicknameService } from "@/services/user";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading: isLoading, error, signInFn } = useAuth();
+  const { loading, error, signInFn } = useAuth();
 
   /** onSubmit 시 로그인을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -38,7 +37,7 @@ export default function SignInForm() {
       </div>
       <button type="submit">클릭!</button>
 
-      <div>{isLoading && <Spiner />}</div>
+      <div>{loading && <Spiner />}</div>
       <div className="temp-text">{typeof error === "string" && error}</div>
     </form>
   );

@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUDPost, { UseCRUDReturnType } from "../crud/use-crud-post";
+import useCRUDComment from "../crud/use-crud-comment";
 
 // 이거 타입 참고
 export const prevCommentDummy = {
@@ -15,9 +15,8 @@ interface Register {
   setText: Dispatch<SetStateAction<string>>;
 }
 
-interface UseCommentFormReturnType extends Partial<UseCRUDReturnType> {
+interface UseCommentFormReturnType {
   register: Register;
-  isLoading: boolean;
   handleSubmitCreate: (event: React.FormEvent<HTMLFormElement>) => void;
   handleSubmitEdit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -25,12 +24,12 @@ interface UseCommentFormReturnType extends Partial<UseCRUDReturnType> {
 // form 기능
 export default function useCommentForm(): UseCommentFormReturnType {
   const {
-    loading: isLoading,
-    createComment,
-    updateComment,
-    deleteComment,
+    loading,
+    createCommentFn,
+    updateCommentFn,
+    deleteCommentFn,
     comments,
-  } = useCRUDPost();
+  } = useCRUDComment();
 
   const [text, setText] = useState("");
 
@@ -39,7 +38,7 @@ export default function useCommentForm(): UseCommentFormReturnType {
     event.preventDefault();
     if (event.type !== "submit") return;
 
-    createComment({ text });
+    createCommentFn({ text });
 
     // redirect to 해당 게시물
   };
@@ -52,7 +51,7 @@ export default function useCommentForm(): UseCommentFormReturnType {
     const id = 0;
     // id를 가져와야 함
     // 요청 x2
-    updateComment(id, { text });
+    updateCommentFn(id, { text });
 
     // redirect to 해당 게시물
   };
@@ -61,9 +60,7 @@ export default function useCommentForm(): UseCommentFormReturnType {
 
   return {
     register,
-    isLoading,
     handleSubmitCreate,
     handleSubmitEdit,
-    comments,
   };
 }

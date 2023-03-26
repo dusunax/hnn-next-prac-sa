@@ -35,9 +35,9 @@ export default function FileInputWithPreview({
 
   return (
     <>
-      <div className={`shrink-0 ${width} ${height} mb-2`}>
+      <div className={`shrink-0 ${width} ${height} mb-4`}>
         <label
-          className={`w-full h-full block relative cursor-pointe mb-2`}
+          className={`w-full h-full block relative cursor-pointer`}
           htmlFor="image"
         >
           <div

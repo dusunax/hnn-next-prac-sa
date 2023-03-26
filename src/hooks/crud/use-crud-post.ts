@@ -40,7 +40,8 @@ interface UseCRUDReturnType extends RetrunType {
 export default function useCRUDPost(): UseCRUDReturnType {
   /** 모든 posts를 fetch합니다. */
   const [fetchAllPostsState, fetchAllPostsFn] = useAsyncFn(async () => {
-    return await fetchAllPostsService();
+    const posts = await fetchAllPostsService();
+    return posts;
   }, []);
 
   /** post를 fetch합니다. */

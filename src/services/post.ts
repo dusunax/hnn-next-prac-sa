@@ -2,23 +2,42 @@ import { CLIENT } from ".";
 import { AxiosError } from "axios";
 import { PostData } from "@/models/post-and-comment";
 import { ErrorType } from "@/models/api";
+import { convertResponseObjectToArray } from "@/utils/convertToObjectArray";
 
 // request & response 타입 아직 x
 // (api 연결 후 타입 수정 필요)
 export interface writeRequestType {
-  title: PostData["title"];
-  description: PostData["description"];
-  album: PostData["album"];
+  title: PostData["postPostTitle"];
+  description: PostData["postYoutubeDescription"];
+  album: PostData["postYoutubeVideoThumbnail"];
 }
 interface PostResponseType {}
+
+interface FetchPostQueryType {
+  order: "recent" | "";
+  MBTI: "string";
+  page: number;
+  limit: number;
+}
 
 /** [api] 전체 posts fetch */
 export const fetchAllPostsService = async (): Promise<
   PostData[] | ErrorType
 > => {
   const res = await CLIENT.get("/posts");
+  return convertResponseObjectToArray(res.data);
+};
 
-  return res.data;
+/** [api] 필터 postList fetch */
+export const fetchPostListService = async (
+  payload: FetchPostQueryType
+): Promise<PostData[] | ErrorType> => {
+  const { order, MBTI, page, limit } = payload;
+
+  const res = await CLIENT.get(
+    `/posts?order=${order}&MBTI=${MBTI}&page=${page}&limit=${limit}`
+  );
+  return convertResponseObjectToArray(res.data);
 };
 
 /** [api] 단일 post, id로 fetch */

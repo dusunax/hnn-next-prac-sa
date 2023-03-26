@@ -41,7 +41,7 @@ interface UseEditFormReturnType extends FormReturnType {
 
 // form 기능
 export default function useEditForm(): UseEditFormReturnType {
-  const { loading: isLoading, updatePost } = useCRUDPost();
+  const { loading, updatePostFn } = useCRUDPost();
   const { getDraftData } = useDraft();
 
   const [draft, setDraft] = useState(getDraftData());
@@ -58,7 +58,7 @@ export default function useEditForm(): UseEditFormReturnType {
     if (event.type !== "submit") return;
 
     // 요청 x2
-    updatePost(id, { title, description, album });
+    updatePostFn(id, {});
     console.log(file);
 
     // redirect to 해당 게시물
@@ -92,10 +92,5 @@ export default function useEditForm(): UseEditFormReturnType {
     setAlbum,
   };
 
-  return {
-    register,
-    isLoading,
-    handleSubmit,
-    draftProps,
-  };
+  return { loading, register, handleSubmit, draftProps };
 }

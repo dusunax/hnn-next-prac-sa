@@ -26,7 +26,7 @@ interface UseWriteFormReturnType extends FormReturnType {
 
 // form 기능
 export default function useWriteForm(): UseWriteFormReturnType {
-  const { loading: isLoading, createPost } = useCRUDPost();
+  const { loading, createPostFn } = useCRUDPost();
   const { getDraftData } = useDraft();
 
   const [draft, setDraft] = useState(getDraftData());
@@ -36,13 +36,13 @@ export default function useWriteForm(): UseWriteFormReturnType {
   const [album, setAlbum] = useState(draft?.album || "");
   const [file, setFile] = useState<File | null>(null);
 
-  /** submit 시, createPost + file전송 */
+  /** submit 시, createPostFn + file전송 */
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (event.type !== "submit") return;
 
     // 요청 x2
-    createPost({ title, description, album });
+    createPostFn({ title, description, album });
     console.log(file);
 
     // redirect to 해당 게시물
@@ -78,8 +78,8 @@ export default function useWriteForm(): UseWriteFormReturnType {
 
   return {
     register,
-    isLoading,
     handleSubmit,
     draftProps,
+    loading,
   };
 }

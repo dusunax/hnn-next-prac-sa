@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         lato: ["var(--lato)"],
       },
+      fontSize: {
+        xxs: "10px",
+      },
       colors: {
         "light-gray": "#f2f4f5",
       },

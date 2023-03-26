@@ -1,4 +1,4 @@
 export interface FormReturnType {
-  isLoading: boolean;
+  loading: boolean;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }

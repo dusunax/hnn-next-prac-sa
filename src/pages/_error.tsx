@@ -1,9 +1,10 @@
+import { NextPageContext } from "next";
+import Image from "next/image";
+
 import CardLayout from "@/layouts/card-layout";
 import LinkButton from "@/components/elements/button/link-button";
 
 import imgSrc from "@public/images/warning.png";
-import { NextPageContext } from "next";
-import Image from "next/image";
 
 interface Props {
   statusCode: number;
@@ -14,6 +15,7 @@ const ErrorPage = ({ statusCode, message }: Props) => {
   return (
     <CardLayout>
       <div className="pt-40 flex flex-col gap-4 items-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <Image src={imgSrc} alt={"에러 아이콘"} width={60} />
         {statusCode === 404 ? (
           <>

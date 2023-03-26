@@ -1,13 +1,8 @@
 import PostDetail from "@/components/post-detail/post-detail";
-import dummyData from "@/dummy.json";
 import CardLayout from "@/layouts/card-layout";
 
 import { PostData } from "@/models/post-and-comment";
-
-const getPosts = async () => {
-  const posts: PostData[] = dummyData.posts;
-  return await posts;
-};
+import { fetchAllPostsService } from "@/services/post";
 
 /**
  * 각 "post"를 컴포넌트에 props로 전달
@@ -20,9 +15,10 @@ export async function getStaticProps({
 }: {
   params: { postname: string };
 }) {
-  const posts = await getPosts();
-  const post = posts.find((post) => post.title === params.postname);
+  const posts = await fetchAllPostsService();
+  if (!Array.isArray(posts)) return;
 
+  const post = posts.find((post) => post.postPostTitle === params.postname);
   if (!post || post === undefined) return { notFound: true }; // post가 없다면 404 페이지로 이동
 
   return {
@@ -34,12 +30,13 @@ export async function getStaticProps({
 
 /** 유저 페이지 static paths */
 export async function getStaticPaths() {
-  const posts = await getPosts();
+  const posts = await fetchAllPostsService();
+  if (!Array.isArray(posts)) return;
 
   const paths = posts.map((post) => ({
     params: {
-      nickname: post.nickname,
-      postname: post.title, // 프리 랜더링할 페이지(uri)
+      nickname: post.userNickname,
+      postname: post.postPostTitle, // 프리 랜더링할 페이지(uri)
     },
   }));
 

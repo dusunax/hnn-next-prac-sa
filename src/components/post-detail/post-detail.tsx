@@ -10,16 +10,15 @@ import CommentList from "./comments/commentList";
 
 export default function PostDetail({ post }: { post: PostData }) {
   const {
-    id,
-    src,
-    mbti,
-    nickname,
-    album,
-    title,
-    created_at,
-    likes_num,
-    comments,
-    description,
+    postId: id,
+    postYoutubeUri: src,
+    userMBTI: mbti,
+    userNickname: nickname,
+    postYoutubeVideoThumbnail: album,
+    postPostTitle: title,
+    postPublishedAt: created_at,
+    countLike: likes_num,
+    postYoutubeDescription: description,
   } = post;
 
   const [width, setWidth] = useState(0);
@@ -58,7 +57,7 @@ export default function PostDetail({ post }: { post: PostData }) {
         </div>
 
         {/* 댓글 리스트 */}
-        <CommentList opacity={opacity} comments={comments} />
+        {/* <CommentList opacity={opacity} comments={comments} /> */}
       </aside>
     </div>
   );

@@ -7,7 +7,7 @@ interface EditComponentProps {
   isLoading?: boolean;
 }
 export default function EditComponent(props: EditComponentProps) {
-  const { register, isLoading, handleSubmit, draftProps } = useEditForm();
+  const { loading, register, handleSubmit, draftProps } = useEditForm();
   const {
     file,
     setFile,
@@ -44,7 +44,7 @@ export default function EditComponent(props: EditComponentProps) {
         />
         <button>submit 클릭!</button>
         <div>
-          {isLoading && (
+          {loading && (
             <div
               className="spinner"
               aria-label="로딩 중입니다"
