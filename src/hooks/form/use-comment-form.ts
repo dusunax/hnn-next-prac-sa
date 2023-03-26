@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUD, { UseCRUDReturnType } from "../crud/use-crud-post-and-comment";
+import useCRUDPost, { UseCRUDReturnType } from "../crud/use-crud-post";
 
 // 이거 타입 참고
 export const prevCommentDummy = {
@@ -24,8 +24,13 @@ interface UseCommentFormReturnType extends Partial<UseCRUDReturnType> {
 
 // form 기능
 export default function useCommentForm(): UseCommentFormReturnType {
-  const { isLoading, createComment, updateComment, deleteComment, comments } =
-    useCRUD();
+  const {
+    loading: isLoading,
+    createComment,
+    updateComment,
+    deleteComment,
+    comments,
+  } = useCRUDPost();
 
   const [text, setText] = useState("");
 

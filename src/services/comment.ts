@@ -12,15 +12,15 @@ import { ErrorType } from "@/models/api";
 // 3. 단일 수정
 // 4. 단일 삭제
 
-export interface writeRequestType {
+export interface commentCreateRequestType {
   text: CommentData["text"];
 }
 interface CommentResponseType {}
 
-/** [api] 전체 Comments fetch */
-export const fetchAllCommentsService = async (): Promise<
-  CommentData[] | ErrorType
-> => {
+/** [api] 해당 id의 Comments fetch */
+export const fetchCommentsService = async (
+  postId: number
+): Promise<CommentData[] | ErrorType> => {
   try {
     const res = await CLIENT.get("/comment");
 
@@ -33,7 +33,7 @@ export const fetchAllCommentsService = async (): Promise<
 
 /** [api] comment 작성 */
 export const createCommentService = async (
-  CommentData: writeRequestType
+  CommentData: commentCreateRequestType
 ): Promise<CommentData | ErrorType> => {
   try {
     const res = await CLIENT.post("/comments", CommentData);

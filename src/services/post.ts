@@ -16,14 +16,9 @@ interface PostResponseType {}
 export const fetchAllPostsService = async (): Promise<
   PostData[] | ErrorType
 > => {
-  try {
-    const res = await CLIENT.get("/posts");
+  const res = await CLIENT.get("/posts");
 
-    return res.data;
-  } catch (e: AxiosError | any) {
-    const errorResponse = e.response.data.message as ErrorType;
-    return errorResponse;
-  }
+  return res.data;
 };
 
 /** [api] 단일 post, id로 fetch */

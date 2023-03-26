@@ -9,13 +9,21 @@ import ProfileButtonBox from "@/components/elements/button-box/profile-button-bo
 
 import { useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
+import { useAsync } from "react-use";
+import useCRUDPost from "@/hooks/crud/use-crud-post";
 
 export default function MainComponent() {
   const user = useRecoilValue(userState);
   const { isLogin } = user;
+  const { fetchAllPosts } = useCRUDPost();
 
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
+
+  console.log();
+  useAsync(async () => {
+    fetchAllPosts();
+  }, []);
 
   // 페이지네이션
   const [page, setPage] = useState(1);

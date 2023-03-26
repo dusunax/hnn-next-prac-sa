@@ -6,7 +6,7 @@ import Spiner from "@/components/elements/spiner/spiner";
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoading, error, signUpFn } = useAuth();
+  const { loading: isLoading, error, signUpFn } = useAuth();
 
   /** onSubmit 시 회원 가입을 요청합니다. */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

@@ -14,5 +14,5 @@ export interface ErrorType {
 
 export interface RetrunType {
   error: string | Error | undefined;
-  isLoading: boolean;
+  loading: boolean;
 }

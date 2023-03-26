@@ -116,8 +116,7 @@ export default function useAuth(): UseAuthReturnType {
   );
 
   return {
-    isLoading:
-      newUserState.loading || signUpState.loading || signInState.loading,
+    loading: newUserState.loading || signUpState.loading || signInState.loading,
     error: newUserState.error || signUpState.error || signInState.error,
     signUpFn,
     signInFn,

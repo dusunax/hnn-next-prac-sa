@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUD from "@/hooks/crud/use-crud-post-and-comment";
+import useCRUDPost from "@/hooks/crud/use-crud-post";
 import { FormReturnType } from "@/models/form";
 import useDraft from "../crud/use-draft";
 
@@ -41,7 +41,7 @@ interface UseEditFormReturnType extends FormReturnType {
 
 // form 기능
 export default function useEditForm(): UseEditFormReturnType {
-  const { isLoading, updatePost } = useCRUD();
+  const { loading: isLoading, updatePost } = useCRUDPost();
   const { getDraftData } = useDraft();
 
   const [draft, setDraft] = useState(getDraftData());
