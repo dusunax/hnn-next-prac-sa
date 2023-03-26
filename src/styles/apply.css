@@ -43,13 +43,6 @@
   transform: translateX(0);
 }
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: none;
-}
-
 .shadow-center {
   position: relative;
 }

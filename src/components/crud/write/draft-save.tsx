@@ -36,32 +36,32 @@ export default function Draft({
 
   return (
     <>
-      <button onClick={saveDraftHandler}>
+      <div className="inline-block" onClick={saveDraftHandler}>
         <HiDocumentArrowDown
           className="h-6 w-6 cursor-pointer"
           width={20}
           height={20}
           color={"gray"}
         />
-      </button>
-      <button onClick={getDraftHandler}>
+      </div>
+      <div className="inline-block" onClick={getDraftHandler}>
         <HiDocumentArrowUp
           className="h-6 w-6 cursor-pointer"
           width={20}
           height={20}
           color={"gray"}
         />
-      </button>
-      {getDraftData() !== null && (
-        <button onClick={clearDraftHandler}>
-          <TiDocumentDelete
-            className="h-6 w-6 cursor-pointer"
-            width={20}
-            height={20}
-            color={"gray"}
-          />
-        </button>
-      )}
+      </div>
+      {/* {getDraftData() !== null && ( */}
+      <div className="inline-block" onClick={clearDraftHandler}>
+        <TiDocumentDelete
+          className="h-6 w-6 cursor-pointer"
+          width={20}
+          height={20}
+          color={"gray"}
+        />
+      </div>
+      {/* )} */}
     </>
   );
 }

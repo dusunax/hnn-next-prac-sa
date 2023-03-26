@@ -22,4 +22,5 @@ export interface PostData {
   userGender: string;
   countComment: string;
   countLike: string;
+  isPostLike: string;
 }

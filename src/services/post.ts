@@ -15,6 +15,7 @@ interface PostResponseType {}
 
 interface FetchPostQueryType {
   order: "recent" | "";
+  sort?: "DESC" | "ASC";
   MBTI: "string";
   page: number;
   limit: number;
@@ -24,8 +25,8 @@ interface FetchPostQueryType {
 export const fetchAllPostsService = async (): Promise<
   PostData[] | ErrorType
 > => {
-  // const res = await CLIENT.get("/posts");
-  // return convertResponseObjectToArray(res.data);
+  const res = await CLIENT.get("/posts");
+  return convertResponseObjectToArray(res.data);
   return [];
 };
 
@@ -90,6 +91,17 @@ export const deletePostService = async (
 ): Promise<ErrorType | void> => {
   try {
     await CLIENT.delete(`/posts/${postId}`);
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
+  }
+};
+
+export const likePostService = async (
+  postId: number
+): Promise<ErrorType | void> => {
+  try {
+    await CLIENT.post(`/likes/${postId}`);
   } catch (e: AxiosError | any) {
     const errorResponse = e.response.data.message as ErrorType;
     return errorResponse;
