@@ -22,12 +22,12 @@ export const prevPostDummy = {
 interface Register {
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
-  description: string;
-  setDescription: Dispatch<SetStateAction<string>>;
-  album: string;
-  setAlbum: Dispatch<SetStateAction<string>>;
+  postTitle: string;
+  setPostTitle: Dispatch<SetStateAction<string>>;
+  postDescription: string;
+  setPostDescription: Dispatch<SetStateAction<string>>;
+  uri: string;
+  setUri: Dispatch<SetStateAction<string>>;
 }
 
 type DraftProps = Omit<Register, "file" | "setFile"> & {
@@ -47,9 +47,11 @@ export default function useEditForm(): UseEditFormReturnType {
   const [draft, setDraft] = useState(getDraftData());
 
   const [id, setId] = useState(-1);
-  const [title, setTitle] = useState(draft?.title || "");
-  const [description, setDescription] = useState(draft?.description || "");
-  const [album, setAlbum] = useState(draft?.album || "");
+  const [postTitle, setPostTitle] = useState(draft?.postTitle || "");
+  const [postDescription, setPostDescription] = useState(
+    draft?.postDescription || ""
+  );
+  const [uri, setUri] = useState(draft?.uri || "");
   const [file, setFile] = useState<File | null>(null);
 
   /** submit 시, updatePost + file전송 */
@@ -65,31 +67,31 @@ export default function useEditForm(): UseEditFormReturnType {
   };
 
   const clearPost = () => {
-    setTitle("");
-    setDescription("");
-    setAlbum("");
+    setPostTitle("");
+    setPostDescription("");
+    setUri("");
     setFile(null);
   };
 
   const draftProps: DraftProps = {
     clearPost,
-    title,
-    setTitle,
-    description,
-    setDescription,
-    album,
-    setAlbum,
+    postTitle: postTitle,
+    setPostTitle: setPostTitle,
+    postDescription: postDescription,
+    setPostDescription: setPostDescription,
+    uri: uri,
+    setUri: setUri,
   };
 
   const register: Register = {
     file,
     setFile,
-    title,
-    setTitle,
-    description,
-    setDescription,
-    album,
-    setAlbum,
+    postTitle,
+    setPostTitle,
+    postDescription,
+    setPostDescription,
+    uri,
+    setUri,
   };
 
   return { loading, register, handleSubmit, draftProps };

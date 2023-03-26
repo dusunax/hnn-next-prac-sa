@@ -11,12 +11,12 @@ export default function EditComponent(props: EditComponentProps) {
   const {
     file,
     setFile,
-    title,
-    setTitle,
-    description,
-    setDescription,
-    album,
-    setAlbum,
+    postTitle: title,
+    setPostTitle: setTitle,
+    postDescription: description,
+    setPostDescription: setDescription,
+    uri: album,
+    setUri: setAlbum,
   } = register;
 
   return (

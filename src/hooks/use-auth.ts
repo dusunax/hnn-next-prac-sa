@@ -45,7 +45,8 @@ export default function useAuth(): UseAuthReturnType {
     const currentToken = paramsToken || localToken || "";
     saveToken(paramsToken || localToken || "");
 
-    if (user.id !== null) return;
+    if (user.id !== null) return user;
+
     const response = await getLoggedInUserData();
 
     if ("id" in response) {

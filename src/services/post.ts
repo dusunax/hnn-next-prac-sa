@@ -7,9 +7,9 @@ import { convertResponseObjectToArray } from "@/utils/convertToObjectArray";
 // request & response 타입 아직 x
 // (api 연결 후 타입 수정 필요)
 export interface writeRequestType {
-  title: PostData["postPostTitle"];
-  description: PostData["postYoutubeDescription"];
-  album: PostData["postYoutubeVideoThumbnail"];
+  postTitle: PostData["postPostTitle"];
+  postDescription: string;
+  uri: string;
 }
 interface PostResponseType {}
 
@@ -24,8 +24,9 @@ interface FetchPostQueryType {
 export const fetchAllPostsService = async (): Promise<
   PostData[] | ErrorType
 > => {
-  const res = await CLIENT.get("/posts");
-  return convertResponseObjectToArray(res.data);
+  // const res = await CLIENT.get("/posts");
+  // return convertResponseObjectToArray(res.data);
+  return [];
 };
 
 /** [api] 필터 postList fetch */

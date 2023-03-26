@@ -1,50 +1,67 @@
 import { Dispatch, SetStateAction } from "react";
 import useDraft from "@/hooks/crud/use-draft";
 
-interface Draft {
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
-  description: string;
-  setDescription: Dispatch<SetStateAction<string>>;
-  album: string;
-  setAlbum: Dispatch<SetStateAction<string>>;
-  clearPost: () => void;
-}
+import { HiDocumentArrowDown, HiDocumentArrowUp } from "react-icons/hi2";
+import { TiDocumentDelete } from "react-icons/ti";
+import { DraftProps } from "@/hooks/form/use-write-form";
 
 export default function Draft({
-  title,
-  setTitle,
-  description,
-  setDescription,
-  album,
-  setAlbum,
+  postTitle,
+  setPostTitle,
+  postDescription,
+  setPostDescription,
+  uri,
+  setUri,
   clearPost,
-}: Draft) {
+}: DraftProps) {
   const { getDraftData, setDraftData, clearDraftData } = useDraft();
 
   const saveDraftHandler = () => {
-    setDraftData({ title, description, album });
+    setDraftData({ postTitle, postDescription, uri });
   };
 
   const getDraftHandler = () => {
     const draft = getDraftData();
     if (!draft) return <></>;
 
-    setTitle(draft.title);
-    setDescription(draft.description);
-    setAlbum(draft.album);
+    setPostTitle(draft.postTitle);
+    setPostDescription(draft.postDescription);
+    setUri(draft.uri);
   };
 
   const clearDraftHandler = () => {
     clearDraftData();
     clearPost();
   };
-  
+
   return (
     <>
-      <button onClick={saveDraftHandler}>임시저장</button>
-      <button onClick={getDraftHandler}>임시저장 불러오기</button>
-      <button onClick={clearDraftHandler}>임시저장 삭제</button>
+      <button onClick={saveDraftHandler}>
+        <HiDocumentArrowDown
+          className="h-6 w-6 cursor-pointer"
+          width={20}
+          height={20}
+          color={"gray"}
+        />
+      </button>
+      <button onClick={getDraftHandler}>
+        <HiDocumentArrowUp
+          className="h-6 w-6 cursor-pointer"
+          width={20}
+          height={20}
+          color={"gray"}
+        />
+      </button>
+      {getDraftData() !== null && (
+        <button onClick={clearDraftHandler}>
+          <TiDocumentDelete
+            className="h-6 w-6 cursor-pointer"
+            width={20}
+            height={20}
+            color={"gray"}
+          />
+        </button>
+      )}
     </>
   );
 }
