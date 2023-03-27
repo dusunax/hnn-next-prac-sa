@@ -52,7 +52,6 @@ export default function Draft({
           color={"gray"}
         />
       </div>
-      {/* {getDraftData() !== null && ( */}
       <div className="inline-block" onClick={clearDraftHandler}>
         <TiDocumentDelete
           className="h-6 w-6 cursor-pointer"
