@@ -133,8 +133,8 @@ export default function CommentList({
       <PaginationComponent
         page={page}
         setPage={setPage}
-        totalPages={totalPages}
-        limit={limit}
+        TOTAL_PAGES={totalPages}
+        MAX_PAGE_NUMBER={limit}
       />
 
       <form onSubmit={handleSubmitCreate}>

@@ -23,7 +23,9 @@ export async function getStaticProps({
   params: { nickname: string };
 }) {
   const users = await getUsers();
-  const user = users.find((user) => "@" + user.nickname === params.nickname);
+  const user = users.find(
+    (user) => "@" + user.userNickname === params.nickname
+  );
 
   if (!user || user === undefined) return { notFound: true }; // user가 없다면 404 페이지로 이동
 
@@ -40,7 +42,7 @@ export async function getStaticPaths() {
 
   const paths = users.map((user) => ({
     params: {
-      nickname: user.nickname,
+      nickname: user.userNickname,
     },
   }));
 
@@ -56,5 +58,5 @@ export default function ProfilePage({ user }: { user: UserData }) {
 
   if (!user) return <>props 잘못됨</>;
 
-  return <CardLayout>유저명 : {user.nickname}</CardLayout>;
+  return <CardLayout>유저명 : {user.userNickname}</CardLayout>;
 }

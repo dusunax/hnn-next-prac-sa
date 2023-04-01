@@ -4,15 +4,11 @@ import { PostData } from "@/models/post-and-comment";
 import { ErrorType } from "@/models/api";
 import { convertResponseObjectToArray } from "@/utils/convertToObjectArray";
 
-// request & response 타입 아직 x
-// (api 연결 후 타입 수정 필요)
 export interface writeRequestType {
   postTitle: PostData["postPostTitle"];
   postDescription: string;
   uri: string;
 }
-interface PostResponseType {}
-
 interface FetchPostQueryType {
   order: "recent" | "";
   sort?: "DESC" | "ASC";
@@ -21,24 +17,19 @@ interface FetchPostQueryType {
   limit: number;
 }
 
-/** [api] 전체 posts fetch */
+/** [api] (구) 전체 posts fetch */
 export const fetchAllPostsService = async (): Promise<
   PostData[] | ErrorType
 > => {
   const res = await CLIENT.get("/posts");
   return convertResponseObjectToArray(res.data);
-  return [];
 };
 
 /** [api] 필터 postList fetch */
 export const fetchPostListService = async (
-  payload: FetchPostQueryType
+  search: string
 ): Promise<PostData[] | ErrorType> => {
-  const { order, MBTI, page, limit } = payload;
-
-  const res = await CLIENT.get(
-    `/posts?order=${order}&MBTI=${MBTI}&page=${page}&limit=${limit}`
-  );
+  const res = await CLIENT.get(`/posts${search}`);
   return convertResponseObjectToArray(res.data);
 };
 
@@ -97,11 +88,26 @@ export const deletePostService = async (
   }
 };
 
+/** postId에 해당하는 게시글에 [좋아요/좋아요 취소]를 요청합니다. */
 export const likePostService = async (
   postId: number
 ): Promise<ErrorType | void> => {
   try {
     await CLIENT.post(`/likes/${postId}`);
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
+  }
+};
+
+/** maxPageNumber: number를 리턴합니다. */
+export const reqMaxPageNumberService = async (
+  queryString: string
+): Promise<ErrorType | number> => {
+  try {
+    const res = await CLIENT.get("/posts/page" + queryString);
+
+    return res.data[0].maxPageNumber;
   } catch (e: AxiosError | any) {
     const errorResponse = e.response.data.message as ErrorType;
     return errorResponse;

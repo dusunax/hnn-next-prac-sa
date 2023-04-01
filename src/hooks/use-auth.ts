@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAsync, useAsyncFn, useSearchParam } from "react-use";
+import { useEffect } from "react";
+import { useAsync, useAsyncFn, useEffectOnce, useSearchParam } from "react-use";
 
 import { getToken, saveToken, removeToken } from "@/utils/storageToken";
 import { signInService, signUpService } from "@/services/auth";
@@ -24,12 +24,12 @@ interface UseAuthReturnType extends RetrunType {
 }
 
 const initialUser: UserStateType = {
-  id: null,
-  MBTI: "",
+  userId: null,
+  userMBTI: "",
   token: "",
-  nickname: "",
-  gender: "",
-  profilePicture: "",
+  userNickname: "",
+  userGender: "",
+  userProfileImage: "",
   isLogin: false,
 };
 
@@ -45,25 +45,25 @@ export default function useAuth(): UseAuthReturnType {
     const currentToken = paramsToken || localToken || "";
     saveToken(paramsToken || localToken || "");
 
-    if (user.id !== null) return user;
+    if (user.userId !== null) return user;
 
     const response = await getLoggedInUserData();
 
-    if ("id" in response) {
+    if ("userId" in response) {
       const newUser = {
         ...initialUser,
-        MBTI: response.MBTI,
-        nickname: response.nickname,
-        token: currentToken,
-        gender: response.gender,
-        profilePicture: response.profilePicture,
+        userMBTI: response.userMBTI,
+        userNickname: response.userNickname,
+        userGender: response.userGender,
+        userProfileImage: response.userProfileImage,
         isLogin: true,
+        token: currentToken,
       };
       setUser(newUser);
 
       return newUser;
     }
-  }, [paramsToken]);
+  }, []);
 
   /** 새 토큰  */
   const newTokenHandler = (appToken: string) => {

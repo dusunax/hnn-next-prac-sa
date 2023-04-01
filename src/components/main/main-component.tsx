@@ -17,15 +17,21 @@ export default function MainComponent() {
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  const totalPages = 13;
-  const limit = 3;
+  const LIMIT = 5;
 
   // 게시글
-  const { posts, fetchAllPostsFn } = useCRUDPost();
+  const {
+    posts,
+    fetchAllPostsFn,
+    maxPageFetchFn,
+    fetchAllPostsByQueryStringFn,
+    maxPageNumber,
+  } = useCRUDPost();
 
   useEffect(() => {
     fetchAllPostsFn();
-  }, [fetchAllPostsFn]);
+    maxPageFetchFn();
+  }, [fetchAllPostsFn, maxPageFetchFn]);
 
   // 트랜지션
   const [width, setWidth] = useState(0);
@@ -70,8 +76,9 @@ export default function MainComponent() {
               <PaginationComponent
                 page={page}
                 setPage={setPage}
-                totalPages={totalPages}
-                limit={limit}
+                MAX_PAGE_NUMBER={Number(maxPageNumber) / LIMIT || 1}
+                LIMIT={LIMIT}
+                fetchAllPostsByQueryStringFn={fetchAllPostsByQueryStringFn}
               />
 
               <LinkButton isDisabled={!isLogin} href={"/write"}>

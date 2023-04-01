@@ -22,7 +22,7 @@ export default function AuthCallback() {
   // 이미 MBTI가 선택되었다면 메인으로 이동합니다.
   useEffect(() => {
     // hasUserMBTI : recoil 기본값 = "", api "/user" 리턴값 = "미정"
-    const hasUserMBTI = user?.MBTI !== "" && user?.MBTI !== "미정";
+    const hasUserMBTI = user?.userMBTI !== "" && user?.userMBTI !== "미정";
     if (hasUserMBTI) router.push("/");
   }, [user, router]);
 

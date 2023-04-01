@@ -1,18 +1,30 @@
-import { Pagination } from "./pagination-component";
+import { PaginationComponentProps } from "./pagination-component";
 
-const RenderPages = ({ limit, page, setPage, totalPages }: Pagination) => {
-  const block = Math.floor((page - 1) / limit) * limit; // 각 limit의 단위
+interface PaginationListPropsWithoutFetchAndLimit
+  extends Omit<
+    PaginationComponentProps,
+    "fetchAllPostsByQueryStringFn" | "LIMIT"
+  > {
+  // 추가적인 프로퍼티를 정의할 수 있습니다.
+  handlePageClick: (page: number) => void;
+}
+
+const RenderPages = ({
+  MAX_PAGE_NUMBER,
+  page,
+  setPage,
+  handlePageClick,
+}: PaginationListPropsWithoutFetchAndLimit) => {
+  const block = Math.floor((page - 1) / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER; // 각 limit의 단위
 
   return (
     <>
-      {Array(limit)
+      {Array(MAX_PAGE_NUMBER)
         .fill("")
         .map((x, idx) => {
           const index = block + idx + 1;
 
-          if (index > totalPages) return null;
-
-          const handleClick = () => setPage(index);
+          if (index > MAX_PAGE_NUMBER) return null;
 
           return (
             <li
@@ -20,9 +32,9 @@ const RenderPages = ({ limit, page, setPage, totalPages }: Pagination) => {
               role="button"
               className={
                 "select-none text-xs " +
-                (page === index ? "active text-blue-500" : " text-blue-200")
+                (page === index ? "active text-gray-500" : " text-blue-200")
               }
-              onClick={handleClick}
+              onClick={() => handlePageClick(index)}
             >
               ●
             </li>
@@ -33,17 +45,17 @@ const RenderPages = ({ limit, page, setPage, totalPages }: Pagination) => {
 };
 
 export default function PaginationList({
-  limit,
+  MAX_PAGE_NUMBER,
   page,
   setPage,
-  totalPages,
-}: Pagination) {
+  handlePageClick,
+}: PaginationListPropsWithoutFetchAndLimit) {
   return (
     <RenderPages
-      limit={limit}
+      MAX_PAGE_NUMBER={MAX_PAGE_NUMBER}
       page={page}
       setPage={setPage}
-      totalPages={totalPages}
+      handlePageClick={handlePageClick}
     />
   );
 }

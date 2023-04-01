@@ -28,7 +28,7 @@ export default function ProfileEdit() {
         height="h-20"
         rounded="rounded-full"
         hasButton={false}
-        defaultImage={user.profilePicture}
+        defaultImage={user.userProfileImage}
         imageOnChange={userAvatarUpdate}
       />
       <SelectOptionalUserData />

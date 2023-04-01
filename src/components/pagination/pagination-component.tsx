@@ -1,4 +1,4 @@
-import { Dispatch, useState } from "react";
+import { Dispatch } from "react";
 
 import {
   MdKeyboardArrowRight as IconNext,
@@ -8,10 +8,15 @@ import {
 } from "react-icons/md";
 
 import PaginationList from "./pagination-list";
+import { PostData } from "@/models/post-and-comment";
+import { ErrorType } from "@/models/api";
 
-export interface Pagination {
-  limit: number;
-  totalPages: number;
+export interface PaginationComponentProps {
+  fetchAllPostsByQueryStringFn: (
+    queryString: string
+  ) => Promise<ErrorType | PostData[]>;
+  LIMIT: number;
+  MAX_PAGE_NUMBER: number;
   page: number;
   setPage: Dispatch<React.SetStateAction<number>>;
 }
@@ -19,38 +24,57 @@ export interface Pagination {
 export default function PaginationComponent({
   page,
   setPage,
-  totalPages,
-  limit,
-}: Pagination) {
-  const block = Math.floor((page - 1) / limit) * limit; // 각 10의 단위
+  MAX_PAGE_NUMBER,
+  LIMIT,
+  fetchAllPostsByQueryStringFn,
+}: PaginationComponentProps) {
+  const block = Math.floor((page - 1) / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER; // 각 10의 단위
 
   const isFirstPage = page === 1;
   const isFirstBlock = block === 0;
-  const isLastPage = page === totalPages;
-  const isLastBlock = Math.floor(totalPages / limit) * limit === block;
+  const isLastPage = page === MAX_PAGE_NUMBER;
+  const isLastBlock =
+    Math.floor(MAX_PAGE_NUMBER / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER === block;
 
   const handlePrevBlock = () => {
     if (!isFirstBlock) {
-      setPage(block - limit + 1);
+      const newPage = block - MAX_PAGE_NUMBER + 1;
+
+      setPage(block - MAX_PAGE_NUMBER + 1);
+      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
     }
   };
 
   const handlePrevPage = () => {
     if (!isFirstPage) {
-      setPage((prevPage) => prevPage - 1);
+      const newPage = page - 1;
+
+      setPage(newPage);
+      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
     }
   };
 
   const handleNextPage = () => {
     if (!isLastPage) {
-      setPage((prevPage) => prevPage + 1);
+      const newPage = page + 1;
+
+      setPage(newPage);
+      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
     }
   };
 
   const handleNextBlock = () => {
     if (!isLastBlock) {
-      setPage(block + limit + 1);
+      const newPage = block + MAX_PAGE_NUMBER + 1;
+
+      setPage(block + MAX_PAGE_NUMBER + 1);
+      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
     }
+  };
+
+  const handlePageClick = (page: number) => {
+    setPage(page);
+    fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${page}&sort=DESC`);
   };
 
   return (
@@ -73,10 +97,10 @@ export default function PaginationComponent({
       </li>
 
       <PaginationList
-        limit={limit}
+        MAX_PAGE_NUMBER={MAX_PAGE_NUMBER}
         page={page}
         setPage={setPage}
-        totalPages={totalPages}
+        handlePageClick={handlePageClick}
       />
 
       <li

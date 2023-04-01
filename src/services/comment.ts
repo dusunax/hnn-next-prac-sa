@@ -71,3 +71,15 @@ export const deleteCommentService = async (
     return errorResponse;
   }
 };
+
+/** [api] comment 좋아요 */
+export const likeCommentService = async (
+  commentId: number
+): Promise<ErrorType | void> => {
+  try {
+    await CLIENT.patch(`/likes/${commentId}`);
+  } catch (e: AxiosError | any) {
+    const errorResponse = e.response.data.message as ErrorType;
+    return errorResponse;
+  }
+};
