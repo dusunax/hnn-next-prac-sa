@@ -19,7 +19,7 @@ export default function ProfileButtonBox() {
       {/* 로그인 상태가 아닐 때 */}
       {!isHover && (
         <div className="flex gap-2 items-center text-sm font-bold text-gray-400">
-          {user.nickname}
+          {user.userNickname}
           <button
             onMouseEnter={() => setIsHover(true)}
             className="block p-2 bg-[#333c3b] rounded-full hover:rotate-12 transition-transform"

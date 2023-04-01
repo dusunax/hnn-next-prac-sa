@@ -6,7 +6,6 @@ import FileInputWithPreview from "../elements/form/file-image/file-image-compone
 import { useRecoilState } from "recoil";
 import { userState } from "@/store/user";
 
-import { updateUserAvatarService } from "@/services/user";
 import useUser from "@/hooks/use-user";
 
 export default function ProfileEdit() {
@@ -29,7 +28,7 @@ export default function ProfileEdit() {
         height="h-20"
         rounded="rounded-full"
         hasButton={false}
-        defaultImage={user.profilePicture}
+        defaultImage={user.userProfileImage}
         imageOnChange={userAvatarUpdate}
       />
       <SelectOptionalUserData />

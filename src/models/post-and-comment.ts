@@ -6,15 +6,21 @@ export interface CommentData {
 }
 
 export interface PostData {
-  id: number;
-  src: string;
-  mbti: string;
-  nickname: string;
-  avatar: string;
-  album: string;
-  title: string;
-  description: string;
-  created_at: string;
-  likes_num: number;
-  comments: CommentData[];
+  postId: number;
+  postYoutubeUri: string;
+  postYoutubeTitle: string;
+  postYoutubeDescription: string;
+  postPublishedAt: string;
+  postYoutubeVideoThumbnail: string;
+  postYoutubeVideoId: string;
+  countPostView: number;
+  postPostTitle: string;
+  userId: number;
+  userProfileImage: string;
+  userNickname: string;
+  userMBTI: string;
+  userGender: string;
+  countComment: string;
+  countLike: string;
+  isPostLike: string;
 }

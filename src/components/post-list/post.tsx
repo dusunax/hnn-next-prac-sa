@@ -1,32 +1,95 @@
-import Image from "next/image";
+import { MouseEvent } from "react";
 
 import { PostData as PostType } from "@/models/post-and-comment";
 
+import { FaHeart } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
+import { likePostService } from "@/services/post";
+import { useState } from "react";
+import Link from "next/link";
+
 export default function Post({ post }: { post: PostType }) {
-  const { mbti, nickname, album, title, created_at, likes_num, avatar } = post;
+  const {
+    postId,
+    userNickname,
+    postYoutubeTitle,
+    postPostTitle,
+    postPublishedAt,
+    countLike,
+    userProfileImage,
+    postYoutubeVideoThumbnail,
+    isPostLike,
+  } = post;
+  const [liked, setLiked] = useState(isPostLike === "1");
+  const [viewlikeCount, setViewLikeCount] = useState(+countLike);
+
+  const albumCoverChange = (
+    e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+  ) => {
+    const target = e.target as HTMLElement;
+    const postElement = target.closest("li");
+
+    if (!postElement) return;
+    const thumbnail = postElement.dataset.thumbnail;
+    const imageElement = document.querySelector(
+      "#album-cover"
+    ) as HTMLImageElement;
+
+    if (thumbnail && imageElement) {
+      imageElement.src = thumbnail;
+    }
+  };
 
   return (
-    <li className="w-full h-24 max-h-24 flex gap-4 items-center justify-between border-b-2">
-      <div className="flex flex-col items-center">
-        <Image
-          className="w-10 h-12 rounded-full bg-gray-400"
-          width={40}
-          height={40}
-          src={avatar}
-          alt={nickname}
-        />
-        <span className="text-xs">{nickname}</span>
-      </div>
+    <li
+      className="w-full h-24 max-h-24 flex gap-4 items-center justify-between border-b-2"
+      data-thumbnail={postYoutubeVideoThumbnail}
+      onMouseEnter={(e) => {
+        albumCoverChange(e);
+      }}
+    >
+      <Link
+        className="flex-1 flex gap-4"
+        href={`/@${userNickname}/${postPostTitle}`}
+      >
+        <div className="w-12 shrink-0 flex flex-col items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="shrink-0 w-8 h-8 mb-1 object-cover rounded-full bg-gray-400"
+            src={userProfileImage}
+            alt={userNickname}
+          />
+          <span className="text-xxs break-keep text-center text-gray-700 font-lato">
+            {userNickname}
+          </span>
+        </div>
 
-      <div className="flex-1 flex flex-col">
-        <span className="font-bold">{title}</span>
-        <span className="text-sm">{album}</span>
-      </div>
+        <div className="w-10 flex flex-1 flex-col">
+          <span className="font-bold overflow-hidden whitespace-nowrap overflow-ellipsis">
+            {postPostTitle}
+          </span>
+          <span className="text-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
+            {postYoutubeTitle}
+          </span>
+        </div>
+      </Link>
 
-      <div className="text-xs flex flex-col items-end">
-        <span>{created_at}</span>
-        <button>좋아요 {likes_num}</button>
-        <div className="mbti">{mbti}</div>
+      <div className="text-xs flex flex-col items-end font-lato">
+        <span>{postPublishedAt.slice(0, 10).replaceAll("-", ". ")}</span>
+        <div
+          className="flex gap-1 items-center"
+          onClick={(e) => {
+            e.stopPropagation();
+
+            likePostService(postId);
+
+            setLiked(!liked);
+            setViewLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+          }}
+        >
+          {liked ? <FaHeart color="#ff5555" /> : <FiHeart color="#ff5555" />}
+          {viewlikeCount}
+        </div>
       </div>
     </li>
   );

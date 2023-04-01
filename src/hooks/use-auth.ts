@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAsync, useAsyncFn, useSearchParam } from "react-use";
+import { useEffect } from "react";
+import { useAsync, useAsyncFn, useEffectOnce, useSearchParam } from "react-use";
 
 import { getToken, saveToken, removeToken } from "@/utils/storageToken";
 import { signInService, signUpService } from "@/services/auth";
@@ -20,16 +20,16 @@ interface UseAuthReturnType extends RetrunType {
   signUpFn: (data: RegisterRequestType) => void;
   signInFn: (data: RegisterRequestType) => void;
   signOutFn: () => void;
-  user: UserStateType;
+  user: UserStateType | undefined;
 }
 
 const initialUser: UserStateType = {
-  id: null,
-  MBTI: "",
+  userId: null,
+  userMBTI: "",
   token: "",
-  nickname: "",
-  gender: "",
-  profilePicture: "",
+  userNickname: "",
+  userGender: "",
+  userProfileImage: "",
   isLogin: false,
 };
 
@@ -45,21 +45,25 @@ export default function useAuth(): UseAuthReturnType {
     const currentToken = paramsToken || localToken || "";
     saveToken(paramsToken || localToken || "");
 
-    if (user.id !== null) return;
-    const userData = await getLoggedInUserData();
+    if (user.userId !== null) return user;
 
-    if ("id" in userData) {
-      return setUser({
+    const response = await getLoggedInUserData();
+
+    if ("userId" in response) {
+      const newUser = {
         ...initialUser,
-        MBTI: userData.MBTI,
-        nickname: userData.nickname,
-        token: currentToken,
-        gender: userData.gender,
-        profilePicture: userData.profilePicture,
+        userMBTI: response.userMBTI,
+        userNickname: response.userNickname,
+        userGender: response.userGender,
+        userProfileImage: response.userProfileImage,
         isLogin: true,
-      });
+        token: currentToken,
+      };
+      setUser(newUser);
+
+      return newUser;
     }
-  }, [paramsToken]);
+  }, []);
 
   /** 새 토큰  */
   const newTokenHandler = (appToken: string) => {
@@ -116,12 +120,11 @@ export default function useAuth(): UseAuthReturnType {
   );
 
   return {
-    isLoading:
-      newUserState.loading || signUpState.loading || signInState.loading,
+    loading: newUserState.loading || signUpState.loading || signInState.loading,
     error: newUserState.error || signUpState.error || signInState.error,
     signUpFn,
     signInFn,
     signOutFn,
-    user,
+    user: newUserState.value,
   };
 }

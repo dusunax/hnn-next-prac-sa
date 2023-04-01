@@ -9,22 +9,36 @@ import ProfileButtonBox from "@/components/elements/button-box/profile-button-bo
 
 import { useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
+import useCRUDPost from "@/hooks/crud/use-crud-post";
 
 export default function MainComponent() {
   const user = useRecoilValue(userState);
   const { isLogin } = user;
 
+  // 페이지네이션
+  const [page, setPage] = useState(1);
+  const LIMIT = 5;
+
+  // 게시글
+  const {
+    posts,
+    fetchAllPostsFn,
+    maxPageFetchFn,
+    fetchAllPostsByQueryStringFn,
+    maxPageNumber,
+  } = useCRUDPost();
+
+  useEffect(() => {
+    fetchAllPostsFn();
+    maxPageFetchFn();
+  }, [fetchAllPostsFn, maxPageFetchFn]);
+
+  // 트랜지션
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
-  // 페이지네이션
-  const [page, setPage] = useState(1);
-  const totalPages = 13;
-  const limit = 3;
-
-  // 트랜지션
   useEffect(() => {
-    setWidth(40);
+    setWidth(60);
     setTimeout(() => {
       setOpacity(1);
     }, 300);
@@ -54,15 +68,17 @@ export default function MainComponent() {
             {!isLogin && <SocialButtonBox />}
           </div>
 
-          <PostList />
+          {/* 게시글 리스트 */}
+          {Array.isArray(posts) && <PostList posts={posts} />}
 
           <footer className="h-24">
             <div className="text-right">
               <PaginationComponent
                 page={page}
                 setPage={setPage}
-                totalPages={totalPages}
-                limit={limit}
+                MAX_PAGE_NUMBER={Number(maxPageNumber) / LIMIT || 1}
+                LIMIT={LIMIT}
+                fetchAllPostsByQueryStringFn={fetchAllPostsByQueryStringFn}
               />
 
               <LinkButton isDisabled={!isLogin} href={"/write"}>

@@ -1,21 +1,19 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
-import useCRUDPost from "@/hooks/crud/use-crud-post-and-comment";
+import useCRUDPost from "@/hooks/crud/use-crud-post";
 import { FormReturnType } from "@/models/form";
 import useDraft from "@/hooks/crud/use-draft";
 
 interface Register {
-  file: File | null;
-  setFile: Dispatch<SetStateAction<File | null>>;
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
-  description: string;
-  setDescription: Dispatch<SetStateAction<string>>;
-  album: string;
-  setAlbum: Dispatch<SetStateAction<string>>;
+  postTitle: string;
+  setPostTitle: Dispatch<SetStateAction<string>>;
+  postDescription: string;
+  setPostDescription: Dispatch<SetStateAction<string>>;
+  uri: string;
+  setUri: Dispatch<SetStateAction<string>>;
 }
 
-type DraftProps = Omit<Register, "file" | "setFile"> & {
+export type DraftProps = Omit<Register, "file" | "setFile"> & {
   clearPost: () => void;
 };
 
@@ -26,60 +24,64 @@ interface UseWriteFormReturnType extends FormReturnType {
 
 // form 기능
 export default function useWriteForm(): UseWriteFormReturnType {
-  const { isLoading, createPost } = useCRUDPost();
+  const { loading, createPostFn } = useCRUDPost();
   const { getDraftData } = useDraft();
 
   const [draft, setDraft] = useState(getDraftData());
 
-  const [title, setTitle] = useState(draft?.title || "");
-  const [description, setDescription] = useState(draft?.description || "");
-  const [album, setAlbum] = useState(draft?.album || "");
+  const [postTitle, setPostTitle] = useState(draft?.postTitle || "");
+  const [postDescription, setPostDescription] = useState(
+    draft?.postDescription || ""
+  );
+  const [uri, setUri] = useState(draft?.uri || "");
   const [file, setFile] = useState<File | null>(null);
 
-  /** submit 시, createPost + file전송 */
+  /** submit 시, createPostFn + file전송 */
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (event.type !== "submit") return;
 
     // 요청 x2
-    createPost({ title, description, album });
+    createPostFn({
+      postTitle,
+      postDescription,
+      uri,
+    });
     console.log(file);
 
     // redirect to 해당 게시물
   };
 
   const clearPost = () => {
-    setTitle("");
-    setDescription("");
-    setAlbum("");
+    setPostTitle("");
+    setPostDescription("");
+    setUri("");
     setFile(null);
   };
 
   const draftProps: DraftProps = {
     clearPost,
-    title,
-    setTitle,
-    description,
-    setDescription,
-    album,
-    setAlbum,
+    postTitle,
+    setPostTitle,
+    postDescription,
+    setPostDescription,
+    uri,
+    setUri,
   };
 
   const register: Register = {
-    file,
-    setFile,
-    title,
-    setTitle,
-    description,
-    setDescription,
-    album,
-    setAlbum,
+    postTitle,
+    setPostTitle,
+    postDescription,
+    setPostDescription,
+    uri,
+    setUri,
   };
 
   return {
     register,
-    isLoading,
     handleSubmit,
     draftProps,
+    loading,
   };
 }

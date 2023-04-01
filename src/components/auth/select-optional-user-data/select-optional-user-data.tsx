@@ -77,7 +77,7 @@ export default function SelectOptionalUserData() {
         </div>
       </section>
 
-      <section className="gender w-full flex flex-col gap-3 items-center mb-10">
+      <section className="gender w-full flex flex-col gap-3 items-center mb-6">
         <SelectGender gender={gender} setGender={setGender} />
         <h1 className="h-20 flex items-center justify-center text-5xl">
           {gender === "" && <GiSwordman fill="#ccc" />}

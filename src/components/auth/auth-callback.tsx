@@ -12,10 +12,9 @@ import FileInputWithPreview from "../elements/form/file-image/file-image-compone
 import useUser from "@/hooks/use-user";
 
 export default function AuthCallback() {
-  const user = useRecoilValue(userState);
   const router = useRouter();
 
-  const {} = useAuth();
+  const { user } = useAuth();
   const { userAvatarUpdate } = useUser();
 
   const [file, setFile] = useState<File | null>(null);
@@ -23,7 +22,7 @@ export default function AuthCallback() {
   // 이미 MBTI가 선택되었다면 메인으로 이동합니다.
   useEffect(() => {
     // hasUserMBTI : recoil 기본값 = "", api "/user" 리턴값 = "미정"
-    const hasUserMBTI = user.MBTI !== "" && user.MBTI !== "미정";
+    const hasUserMBTI = user?.userMBTI !== "" && user?.userMBTI !== "미정";
     if (hasUserMBTI) router.push("/");
   }, [user, router]);
 
@@ -47,8 +46,11 @@ export default function AuthCallback() {
         width="w-20"
         height="h-20"
         rounded="rounded-full"
-        hasButton={true}
+        hasButton={false}
         imageOnChange={userAvatarUpdate}
+        defaultImage={
+          "https://d32eyjf2uu7dd9.cloudfront.net/dev/avatar/default.png"
+        }
       />
       <SelectOptionalUserData />
     </CardLayoutCenter>

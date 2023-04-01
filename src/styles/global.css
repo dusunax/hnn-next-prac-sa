@@ -7,3 +7,10 @@ html {
 .temp-text {
   @apply text-sm text-red-600 block;
 }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}

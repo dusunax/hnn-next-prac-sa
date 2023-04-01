@@ -6,7 +6,8 @@ export default function Comment({ comment }: { comment: CommentType }) {
   return (
     <li className="w-full py-4 flex gap-6 border-b-2">
       <div className="flex flex-col items-center justify-center gap-2">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           className="w-8 h-10 rounded-full bg-gray-400"
           width={32}
           height={40}
