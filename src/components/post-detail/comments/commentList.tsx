@@ -25,9 +25,9 @@ export default function CommentList({
   const { text, setText } = register;
 
   // 페이지네이션
-  const [page, setPage] = useState(1);
-  const totalPages = 13;
-  const limit = 3;
+  // const [page, setPage] = useState(1);
+  // const totalPages = 13;
+  // const limit = 3;
 
   // 댓글
   const [isEdit, setIsEdit] = useState(false);
@@ -130,12 +130,12 @@ export default function CommentList({
         </form>
       </Scrollable>
 
-      <PaginationComponent
+      {/* <PaginationComponent
         page={page}
         setPage={setPage}
-        TOTAL_PAGES={totalPages}
+        TOTAL_PAGES={TOTAL_PAGES}
         MAX_PAGE_NUMBER={limit}
-      />
+      /> */}
 
       <form onSubmit={handleSubmitCreate}>
         <div className="mt-4 h-40">
