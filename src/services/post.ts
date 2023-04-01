@@ -38,9 +38,9 @@ export const fetchPostService = async (
   postId: number
 ): Promise<PostData | ErrorType> => {
   try {
-    const res = await CLIENT.get(`/posts/${postId}`);
+    const res = await CLIENT.get(`/posts/${postId}/detail`);
 
-    return res.data;
+    return res.data[0];
   } catch (e: AxiosError | any) {
     const errorResponse = e.response.data.message as ErrorType;
     return errorResponse;
