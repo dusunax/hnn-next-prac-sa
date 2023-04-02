@@ -7,10 +7,9 @@
     - React에서 React + NextJS
   - NextJS 기본 연습
   - Tailwind 실습
-  - 정기적인 코드 리뷰
 
 - 사용 기술
 
 ```
-NextJS, TypeScript, Tailwind, (React-Query 또는 SWR)
+NextJS, TypeScript, Tailwind
 ```
