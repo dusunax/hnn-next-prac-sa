@@ -1,14 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect } from "react";
+
 import ReactPlayer from "react-player";
 import TwitchPlayer from "react-player/twitch";
 
+import { useRecoilValue } from "recoil";
+import { youTubeVideoIdArrayState } from "@/store/youtubeVideo";
+
 export default function YoutubePlayer() {
-  const videoIds = ["SvFi5TKSj0w", "iRBQGFN-PEY"];
+  const videoIds = useRecoilValue(youTubeVideoIdArrayState);
   const videoUrls = videoIds.map(
     (id) => "https://www.youtube.com/watch?v=" + id
   );
 
-  return <></>;
+  useEffect(() => {
+    console.log("now playing....");
+  }, [videoIds]);
+
+  return (
+    <div>
+      <ReactPlayer
+        url={videoUrls}
+        playing={true}
+        loop={true}
+        pip={true}
+        width="0"
+        height="0"
+        config={{
+          youtube: {
+            playerVars: {
+              controls: 0,
+              autoplay: 1,
+              loop: 1,
+              start: 0,
+              end: 0,
+              modestbranding: 1,
+              playsinline: 1,
+              fs: 0,
+              cc_load_policy: 0,
+              iv_load_policy: 3,
+              autohide: 0,
+              showinfo: 0,
+              volume: 20,
+            },
+          },
+        }}
+      />
+    </div>
+  );
 
   return (
     <div className="flex absolute t-0 w-full">

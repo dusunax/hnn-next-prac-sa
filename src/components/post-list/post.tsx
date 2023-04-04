@@ -7,8 +7,9 @@ import { FiHeart } from "react-icons/fi";
 import { likePostService } from "@/services/post";
 import { useState } from "react";
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
+import { youTubeVideoIdArrayState } from "@/store/youtubeVideo";
 
 export default function Post({ post }: { post: PostType }) {
   const {
@@ -21,9 +22,13 @@ export default function Post({ post }: { post: PostType }) {
     userProfileImage,
     postYoutubeVideoThumbnail,
     isPostLike,
+    postYoutubeVideoId,
   } = post;
   const [liked, setLiked] = useState(isPostLike === "1");
   const [viewlikeCount, setViewLikeCount] = useState(+countLike);
+  const [youTubeVideoIdArray, setYouTubeVideoIdArray] = useRecoilState(
+    youTubeVideoIdArrayState
+  );
 
   const user = useRecoilValue(userState);
 
@@ -32,6 +37,8 @@ export default function Post({ post }: { post: PostType }) {
   ) => {
     const target = e.target as HTMLElement;
     const postElement = target.closest("li");
+
+    setYouTubeVideoIdArray([postYoutubeVideoId]);
 
     if (!postElement) return;
     const thumbnail = postElement.dataset.thumbnail;

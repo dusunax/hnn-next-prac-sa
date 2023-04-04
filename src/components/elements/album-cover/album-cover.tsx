@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Image from "next/image";
+import YoutubePlayer from "@/components/youtube/youtube-player";
 // import src from "@public/banner/1.png";
 
 interface Props {
@@ -29,6 +29,8 @@ export default function AlbumCover({ children, borderRadiusStyle }: Props) {
           showImage ? "opacity-100" : "opacity-0"
         }`}
       />
+
+      <YoutubePlayer />
 
       <div className="absolute w-full h-full">{children}</div>
     </div>
