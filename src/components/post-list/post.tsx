@@ -1,6 +1,6 @@
-import { MouseEvent } from "react";
+import { MouseEvent, Dispatch } from "react";
 
-import { PostData as PostType } from "@/models/post-and-comment";
+import { PostData, PostData as PostType } from "@/models/post-and-comment";
 
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
@@ -11,7 +11,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
 import { youTubeVideoIdArrayState } from "@/store/youtubeVideo";
 
-export default function Post({ post }: { post: PostType }) {
+export default function Post({
+  post,
+  setCurrentPost,
+}: {
+  post: PostType;
+  setCurrentPost: Dispatch<React.SetStateAction<PostData | undefined>>;
+}) {
   const {
     postId,
     userNickname,
@@ -32,32 +38,16 @@ export default function Post({ post }: { post: PostType }) {
 
   const user = useRecoilValue(userState);
 
-  const albumCoverChange = (
-    e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
-  ) => {
-    const target = e.target as HTMLElement;
-    const postElement = target.closest("li");
-
+  const albumCoverChange = () => {
     setYouTubeVideoIdArray([postYoutubeVideoId]);
-
-    if (!postElement) return;
-    const thumbnail = postElement.dataset.thumbnail;
-    const imageElement = document.querySelector(
-      "#album-cover"
-    ) as HTMLImageElement;
-
-    if (thumbnail && imageElement) {
-      imageElement.src = thumbnail;
-    }
+    setCurrentPost(post);
   };
 
   return (
     <li
       className="w-full h-24 max-h-24 flex gap-4 items-center justify-between border-b-2"
       data-thumbnail={postYoutubeVideoThumbnail}
-      onMouseEnter={(e) => {
-        albumCoverChange(e);
-      }}
+      onMouseEnter={albumCoverChange}
     >
       <Link
         className="flex-1 flex gap-4"

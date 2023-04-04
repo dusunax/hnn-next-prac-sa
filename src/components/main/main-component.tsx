@@ -10,6 +10,7 @@ import ProfileButtonBox from "@/components/elements/button-box/profile-button-bo
 import { useRecoilValue } from "recoil";
 import { userState } from "@/store/user";
 import useCRUDPost from "@/hooks/crud/use-crud-post";
+import { PostData } from "@/models/post-and-comment";
 
 export default function MainComponent() {
   const user = useRecoilValue(userState);
@@ -17,7 +18,9 @@ export default function MainComponent() {
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  const LIMIT = 5;
+  const LIMIT = 6;
+
+  const [currentPost, setCurrentPost] = useState<PostData>();
 
   // 게시글
   const {
@@ -69,14 +72,18 @@ export default function MainComponent() {
           </div>
 
           {/* 게시글 리스트 */}
-          {Array.isArray(posts) && <PostList posts={posts} />}
+          {Array.isArray(posts) && (
+            <PostList posts={posts} setCurrentPost={setCurrentPost} />
+          )}
 
           <footer className="h-24">
             <div className="text-right">
               <PaginationComponent
                 page={page}
                 setPage={setPage}
-                MAX_PAGE_NUMBER={Number(maxPageNumber) / LIMIT || 1}
+                MAX_PAGE_NUMBER={
+                  Math.floor(Number(maxPageNumber) / LIMIT) + 1 || 1
+                }
                 LIMIT={LIMIT}
                 fetchAllPostsByQueryStringFn={fetchAllPostsByQueryStringFn}
               />
@@ -89,7 +96,7 @@ export default function MainComponent() {
         </div>
       </div>
 
-      <AlbumCover borderRadiusStyle={"rounded-lg"} />
+      <AlbumCover borderRadiusStyle={"rounded-lg"} currentPost={currentPost} />
     </div>
   );
 }
