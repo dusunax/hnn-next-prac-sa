@@ -1,6 +1,7 @@
 import PostDetail from "@/components/post-detail/post-detail";
 import useCRUDPost from "@/hooks/crud/use-crud-post";
 import CardLayout from "@/layouts/card-layout";
+import CardLayoutCenter from "@/layouts/card-layout-center";
 
 import { PostData } from "@/models/post-and-comment";
 import { useEffectOnce } from "react-use";
@@ -51,12 +52,15 @@ export default function PostPage() {
   const { post, fetchPostFn } = useCRUDPost();
 
   useEffectOnce(() => {
-    fetchPostFn(10);
+    fetchPostFn(1);
   });
 
   return (
-    <CardLayout>
-      {post && "postId" in post && <PostDetail post={post} />}
-    </CardLayout>
+    <CardLayoutCenter>
+      <h3>버그 수정 중입니다.</h3>
+      {/* <PostDetail post={post} /> */}
+    </CardLayoutCenter>
   );
+
+  return <></>;
 }

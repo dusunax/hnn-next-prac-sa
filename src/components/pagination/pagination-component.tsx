@@ -79,14 +79,14 @@ export default function PaginationComponent({
 
   return (
     <ul className="w-full h-12 flex items-center justify-between">
-      <li
+      {/* <li
         className={`button-navigate block ${
           isFirstBlock ? "disable text-gray-300" : ""
         }`}
         onClick={handlePrevBlock}
       >
         <IconPrevBlock />
-      </li>
+      </li> */}
       <li
         className={`button-navigate ${
           isFirstPage ? "disable text-gray-300" : ""
@@ -111,14 +111,14 @@ export default function PaginationComponent({
       >
         <IconNext />
       </li>
-      <li
+      {/* <li
         className={`button-navigate block ${
           isLastBlock ? "disable text-gray-300" : ""
         }`}
         onClick={handleNextBlock}
       >
         <IconNextBlock />
-      </li>
+      </li> */}
     </ul>
   );
 }
