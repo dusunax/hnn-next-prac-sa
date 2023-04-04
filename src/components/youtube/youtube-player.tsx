@@ -31,7 +31,7 @@ export default function YoutubePlayer() {
             playerVars: {
               controls: 0,
               autoplay: 1,
-              loop: 1,
+              loop: 5,
               start: 0,
               end: 0,
               modestbranding: 1,

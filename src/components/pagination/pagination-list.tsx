@@ -15,31 +15,29 @@ const RenderPages = ({
   setPage,
   handlePageClick,
 }: PaginationListPropsWithoutFetchAndLimit) => {
-  const block = Math.floor((page - 1) / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER; // 각 limit의 단위
+  const PaginationCount = new Array(MAX_PAGE_NUMBER).fill("");
 
   return (
     <>
-      {Array(MAX_PAGE_NUMBER)
-        .fill("")
-        .map((x, idx) => {
-          const index = block + idx + 1;
+      {PaginationCount.map((x, idx) => {
+        const index = idx + 1;
 
-          if (index > MAX_PAGE_NUMBER) return null;
+        if (idx > MAX_PAGE_NUMBER) return null;
 
-          return (
-            <li
-              key={index}
-              role="button"
-              className={
-                "select-none text-xs " +
-                (page === index ? "active text-gray-500" : " text-blue-200")
-              }
-              onClick={() => handlePageClick(index)}
-            >
-              ●
-            </li>
-          );
-        })}
+        return (
+          <li
+            key={index}
+            role="button"
+            className={
+              "select-none text-xs " +
+              (page === index ? "active text-gray-500" : " text-blue-200")
+            }
+            onClick={() => handlePageClick(index)}
+          >
+            ●
+          </li>
+        );
+      })}
     </>
   );
 };

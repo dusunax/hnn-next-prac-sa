@@ -3,8 +3,6 @@ import { Dispatch } from "react";
 import {
   MdKeyboardArrowRight as IconNext,
   MdKeyboardArrowLeft as IconPrev,
-  MdKeyboardDoubleArrowRight as IconNextBlock,
-  MdKeyboardDoubleArrowLeft as IconPrevBlock,
 } from "react-icons/md";
 
 import PaginationList from "./pagination-list";
@@ -31,19 +29,7 @@ export default function PaginationComponent({
   const block = Math.floor((page - 1) / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER; // 각 10의 단위
 
   const isFirstPage = page === 1;
-  const isFirstBlock = block === 0;
   const isLastPage = page === MAX_PAGE_NUMBER;
-  const isLastBlock =
-    Math.floor(MAX_PAGE_NUMBER / MAX_PAGE_NUMBER) * MAX_PAGE_NUMBER === block;
-
-  const handlePrevBlock = () => {
-    if (!isFirstBlock) {
-      const newPage = block - MAX_PAGE_NUMBER + 1;
-
-      setPage(block - MAX_PAGE_NUMBER + 1);
-      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
-    }
-  };
 
   const handlePrevPage = () => {
     if (!isFirstPage) {
@@ -63,15 +49,6 @@ export default function PaginationComponent({
     }
   };
 
-  const handleNextBlock = () => {
-    if (!isLastBlock) {
-      const newPage = block + MAX_PAGE_NUMBER + 1;
-
-      setPage(block + MAX_PAGE_NUMBER + 1);
-      fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${newPage}&sort=DESC`);
-    }
-  };
-
   const handlePageClick = (page: number) => {
     setPage(page);
     fetchAllPostsByQueryStringFn(`?limit=${LIMIT}&page=${page}&sort=DESC`);
@@ -79,14 +56,6 @@ export default function PaginationComponent({
 
   return (
     <ul className="w-full h-12 flex items-center justify-between">
-      {/* <li
-        className={`button-navigate block ${
-          isFirstBlock ? "disable text-gray-300" : ""
-        }`}
-        onClick={handlePrevBlock}
-      >
-        <IconPrevBlock />
-      </li> */}
       <li
         className={`button-navigate ${
           isFirstPage ? "disable text-gray-300" : ""
@@ -111,14 +80,6 @@ export default function PaginationComponent({
       >
         <IconNext />
       </li>
-      {/* <li
-        className={`button-navigate block ${
-          isLastBlock ? "disable text-gray-300" : ""
-        }`}
-        onClick={handleNextBlock}
-      >
-        <IconNextBlock />
-      </li> */}
     </ul>
   );
 }

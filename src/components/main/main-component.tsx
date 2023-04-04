@@ -17,7 +17,7 @@ export default function MainComponent() {
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  const LIMIT = 5;
+  const LIMIT = 6;
 
   // 게시글
   const {
@@ -76,7 +76,9 @@ export default function MainComponent() {
               <PaginationComponent
                 page={page}
                 setPage={setPage}
-                MAX_PAGE_NUMBER={Number(maxPageNumber) / LIMIT || 1}
+                MAX_PAGE_NUMBER={
+                  Math.floor(Number(maxPageNumber) / LIMIT) + 1 || 1
+                }
                 LIMIT={LIMIT}
                 fetchAllPostsByQueryStringFn={fetchAllPostsByQueryStringFn}
               />
