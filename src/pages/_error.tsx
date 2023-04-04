@@ -5,6 +5,7 @@ import CardLayout from "@/layouts/card-layout";
 import LinkButton from "@/components/elements/button/link-button";
 
 import imgSrc from "@public/images/warning.png";
+import Button from "@/components/elements/button/button";
 
 interface Props {
   statusCode: number;
@@ -26,9 +27,14 @@ const ErrorPage = ({ statusCode, message }: Props) => {
           <>
             <h1>에러가 발생했습니다.</h1>
             <p>
-              {statusCode
-                ? `서버에서 ${statusCode} 에러를 반환했습니다.`
-                : "알 수 없는 에러입니다."}
+              {statusCode ? `${statusCode} Error` : "알 수 없는 에러입니다."}
+            </p>
+            <p>
+              <Button>
+                <a href="https://github.com/dusunax/hnn-next-prac-sa">
+                  Github으로 이동
+                </a>
+              </Button>
             </p>
           </>
         )}
