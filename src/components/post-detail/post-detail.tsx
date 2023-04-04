@@ -37,7 +37,7 @@ export default function PostDetail({ post }: { post: PostData }) {
   return (
     <div className="h-full flex">
       {/* 게시글 정보 */}
-      <AlbumCover>
+      {/* <AlbumCover>
         <div className="py-40 px-16">
           <h1 className="text-4xl font-bold mb-6">{title}</h1>
           <h2 className="w-52 mb-4">{album}</h2>
@@ -45,7 +45,7 @@ export default function PostDetail({ post }: { post: PostData }) {
         </div>
 
         <Link href={`${pathname}/edit`}>수정</Link>
-      </AlbumCover>
+      </AlbumCover> */}
 
       <aside
         className="px-8 flex flex-col justify-between"
