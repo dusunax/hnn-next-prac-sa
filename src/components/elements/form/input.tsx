@@ -21,6 +21,7 @@ export default function Input({
         id={name}
         type="text"
         value={value}
+        autoComplete="off"
         onChange={(e) => setState(e.target.value)}
       />
     </div>
