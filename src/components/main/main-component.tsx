@@ -65,7 +65,7 @@ export default function MainComponent() {
         >
           <div className="pt-10 pb-6 sticky top-0 bg-light-gray ">
             <h1 className="font-bold">흐느넴</h1>
-            <h3 className="font-bold">지금 뭐 듣고 있어?</h3>
+            <h3 className="font-bold">뉴진스의 하입보이요🥺</h3>
 
             {isLogin && <ProfileButtonBox />}
             {!isLogin && <SocialButtonBox />}

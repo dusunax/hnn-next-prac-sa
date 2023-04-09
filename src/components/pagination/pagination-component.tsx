@@ -55,10 +55,10 @@ export default function PaginationComponent({
   };
 
   return (
-    <ul className="w-full h-12 flex items-center justify-between">
+    <ul className="w-full px-10 h-12 flex items-center justify-between">
       <li
         className={`button-navigate ${
-          isFirstPage ? "disable text-gray-300" : ""
+          isFirstPage ? "disable text-gray-500" : ""
         }`}
         onClick={handlePrevPage}
       >
@@ -74,7 +74,7 @@ export default function PaginationComponent({
 
       <li
         className={`button-navigate ${
-          isLastPage ? "disable text-gray-300" : ""
+          isLastPage ? "disable text-gray-500" : ""
         }`}
         onClick={handleNextPage}
       >

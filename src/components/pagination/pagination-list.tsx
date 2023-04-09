@@ -1,3 +1,4 @@
+import { FaMusic } from "react-icons/fa";
 import { PaginationComponentProps } from "./pagination-component";
 
 interface PaginationListPropsWithoutFetchAndLimit
@@ -30,11 +31,11 @@ const RenderPages = ({
             role="button"
             className={
               "select-none text-xs " +
-              (page === index ? "active text-gray-500" : " text-blue-200")
+              (page === index ? "active text-blue-700" : " text-gray-500")
             }
             onClick={() => handlePageClick(index)}
           >
-            ●
+            <FaMusic />
           </li>
         );
       })}
