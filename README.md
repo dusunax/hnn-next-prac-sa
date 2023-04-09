@@ -2,7 +2,8 @@
 
 >Youtube API를 기반으로 MBTI와 음악을 공유하는 사이드 프로젝트입니다.  
 흐느넴은 2022년 8월 12~18일에 항해 부트캠프에서 7일 동안 작업했었던 프로젝트입니다.  
-6개월 전에 작업했던 해당 프로젝트를 2023년 3월에 주말 동안 틈틈이 리뉴얼 했습니다.
+6개월 전에 작업했던 해당 프로젝트를 2023년 3월에 주말 동안 틈틈이 리뉴얼 했습니다.  
+https://www.youtube.com/watch?v=UF6L6QfTCdo
 
 ![image](https://user-images.githubusercontent.com/94776135/230786292-ec18e7c0-ef1b-4f8f-9112-d0b3eba62b30.png)
 
